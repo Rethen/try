@@ -18,13 +18,10 @@ package com.then.atry.data.repository.datasource;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.then.atry.data.cache.sample.UserCache;
-import com.then.atry.data.net.RestApiImpl;
+import com.then.atry.data.cache.UserCache;
 import com.then.atry.data.entity.mapper.UserEntityJsonMapper;
 import com.then.atry.data.net.RestApi;
-import com.then.atry.data.repository.datasource.sample.CloudUserDataStore;
-import com.then.atry.data.repository.datasource.sample.DiskUserDataStore;
-import com.then.atry.data.repository.datasource.sample.UserDataStore;
+import com.then.atry.data.net.RestApiImpl;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -39,7 +36,7 @@ public class UserDataStoreFactory {
   private final UserCache userCache;
 
   @Inject
-  public UserDataStoreFactory(@NonNull Context context, @NonNull UserCache userCache) {
+  UserDataStoreFactory(@NonNull Context context, @NonNull UserCache userCache) {
     this.context = context.getApplicationContext();
     this.userCache = userCache;
   }
@@ -55,6 +52,7 @@ public class UserDataStoreFactory {
     } else {
       userDataStore = createCloudDataStore();
     }
+
     return userDataStore;
   }
 
@@ -62,8 +60,9 @@ public class UserDataStoreFactory {
    * Create {@link UserDataStore} to retrieve data from the Cloud.
    */
   public UserDataStore createCloudDataStore() {
-    UserEntityJsonMapper entityJsonMapper = new UserEntityJsonMapper();
-    RestApi restApi = new RestApiImpl(this.context, entityJsonMapper);
+    final UserEntityJsonMapper userEntityJsonMapper = new UserEntityJsonMapper();
+    final RestApi restApi = new RestApiImpl(this.context, userEntityJsonMapper);
+
     return new CloudUserDataStore(restApi, this.userCache);
   }
 }

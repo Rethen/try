@@ -32,4 +32,5 @@ dependencies {
     testCompile rootProject.ext.testDependencies["junit"]
     testCompile rootProject.ext.testDependencies["mockito"]
     compile rootProject.ext.dependencies["gson"]
+    compile 'org.assertj:assertj-core:1.7.1'
 }

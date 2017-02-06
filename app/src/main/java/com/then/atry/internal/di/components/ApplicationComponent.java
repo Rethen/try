@@ -18,13 +18,9 @@ package com.then.atry.internal.di.components;
 import android.app.Activity;
 import android.content.Context;
 
-import com.then.atry.data.EhomeReqHelper;
-import com.then.atry.data.preferences.IPreferencesPrefs;
-import com.then.atry.domain.net.HttpApiManager;
-import com.then.atry.domain.RequestFilter;
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
-import com.then.atry.domain.repository.sample.UserRepository;
+import com.then.atry.domain.repository.UserRepository;
 import com.then.atry.internal.di.modules.ApplicationModule;
 
 import javax.inject.Singleton;
@@ -49,11 +45,4 @@ public interface ApplicationComponent {
 
     UserRepository userRepository();
 
-    IPreferencesPrefs iPreferences();
-
-    EhomeReqHelper ehomeReqHelper();
-
-    HttpApiManager httpApiManager();
-
-    RequestFilter requestFilter();
 }

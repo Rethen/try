@@ -15,7 +15,6 @@
  */
 package com.fernandocejas.android10.sample.domain.interactor;
 
-import com.then.atry.domain.RequestFilter;
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
 import com.then.atry.domain.interactor.sample.GetUserList;

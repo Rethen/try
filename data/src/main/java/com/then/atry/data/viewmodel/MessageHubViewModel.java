@@ -1,19 +1,17 @@
 package com.then.atry.data.viewmodel;
 
 import android.databinding.Bindable;
-
 import com.then.atry.data.BR;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
 
 /**
- * Created by then on 2016/12/14.
+ * Created by then on 2017/2/6.
  */
 
 public class MessageHubViewModel extends BaseViewModel {
 
-
     @Bindable
-    private String title;
+    private  String title;
 
     public String getTitle() {
         return title;
@@ -23,5 +21,4 @@ public class MessageHubViewModel extends BaseViewModel {
         this.title = title;
         notifyPropertyChanged(BR.title);
     }
-
 }

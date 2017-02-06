@@ -17,21 +17,15 @@ package com.then.atry.internal.di.modules;
 
 import android.content.Context;
 
-import com.then.atry.data.EhomeReqHelper;
-import com.then.atry.data.EhomeRequestFilter;
-import com.then.atry.data.cache.sample.UserCache;
-import com.then.atry.data.cache.sample.UserCacheImpl;
-import com.then.atry.data.process.converter.json.factory.EhomeJsonConverterFactory;
-import com.then.atry.data.executor.JobExecutor;
-import com.then.atry.data.preferences.IPreferencesPrefs;
-import com.then.atry.data.repository.UserDataRepository;
-import com.then.atry.domain.net.HttpApiManager;
-import com.then.atry.domain.RequestFilter;
-import com.then.atry.domain.executor.PostExecutionThread;
-import com.then.atry.domain.executor.ThreadExecutor;
-import com.then.atry.domain.repository.sample.UserRepository;
 import com.then.atry.UIThread;
 import com.then.atry.application.App;
+import com.then.atry.data.cache.UserCache;
+import com.then.atry.data.cache.UserCacheImpl;
+import com.then.atry.data.executor.JobExecutor;
+import com.then.atry.data.repository.UserDataRepository;
+import com.then.atry.domain.executor.PostExecutionThread;
+import com.then.atry.domain.executor.ThreadExecutor;
+import com.then.atry.domain.repository.UserRepository;
 
 import javax.inject.Singleton;
 
@@ -80,34 +74,5 @@ public class ApplicationModule {
         return userDataRepository;
     }
 
-    @Provides
-    @Singleton
-    IPreferencesPrefs providePreferences() {
-        return IPreferencesPrefs.create(application);
-    }
-
-    @Provides
-    @Singleton
-    EhomeReqHelper provideEhomeReqHelper(IPreferencesPrefs preferences) {
-        return new EhomeReqHelper(preferences);
-    }
-
-    @Provides
-    @Singleton
-    HttpApiManager provideHttpApiManager(EhomeJsonConverterFactory factory) {
-        return new HttpApiManager(factory);
-    }
-
-    @Provides
-    @Singleton
-    EhomeJsonConverterFactory provideSimpleJsonConverterFactory(EhomeReqHelper ehomeReqHelper, IPreferencesPrefs preferencesPrefs) {
-        return EhomeJsonConverterFactory.create(ehomeReqHelper, preferencesPrefs);
-    }
-
-    @Provides
-    @Singleton
-    RequestFilter provideRequestFactory(EhomeReqHelper ehomeReqHelper) {
-        return new EhomeRequestFilter(ehomeReqHelper);
-    }
 
 }

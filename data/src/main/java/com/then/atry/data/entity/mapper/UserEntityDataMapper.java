@@ -16,9 +16,10 @@
 package com.then.atry.data.entity.mapper;
 
 import com.then.atry.data.entity.UserEntity;
-import com.then.atry.domain.model.sample.User;
+import com.then.atry.domain.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,9 +33,7 @@ import javax.inject.Singleton;
 public class UserEntityDataMapper {
 
   @Inject
-  public UserEntityDataMapper() {
-
-  }
+  UserEntityDataMapper() {}
 
   /**
    * Transform a {@link UserEntity} into an {@link User}.
@@ -52,7 +51,6 @@ public class UserEntityDataMapper {
       user.setFollowers(userEntity.getFollowers());
       user.setEmail(userEntity.getEmail());
     }
-
     return user;
   }
 
@@ -62,11 +60,10 @@ public class UserEntityDataMapper {
    * @param userEntityCollection Object Collection to be transformed.
    * @return {@link User} if valid {@link UserEntity} otherwise null.
    */
-  public List<User> transform(List<UserEntity> userEntityCollection) {
-    List<User> userList = new ArrayList<>(20);
-    User user;
+  public List<User> transform(Collection<UserEntity> userEntityCollection) {
+    final List<User> userList = new ArrayList<>(20);
     for (UserEntity userEntity : userEntityCollection) {
-      user = transform(userEntity);
+      final User user = transform(userEntity);
       if (user != null) {
         userList.add(user);
       }

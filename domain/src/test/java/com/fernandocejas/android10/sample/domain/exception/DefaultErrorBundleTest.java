@@ -16,8 +16,6 @@
 package com.fernandocejas.android10.sample.domain.exception;
 
 
-import com.then.atry.domain.exception.DefaultErrorBundle;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

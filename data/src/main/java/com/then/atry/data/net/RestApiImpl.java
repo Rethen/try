@@ -22,12 +22,11 @@ import android.net.NetworkInfo;
 import com.then.atry.data.entity.UserEntity;
 import com.then.atry.data.entity.mapper.UserEntityJsonMapper;
 import com.then.atry.data.exception.NetworkConnectionException;
-import com.fernandocejas.frodo.annotation.RxLogObservable;
 
 import java.net.MalformedURLException;
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * {@link RestApi} implementation for retrieving data from the network.
@@ -35,60 +34,59 @@ import rx.Observable;
 public class RestApiImpl implements RestApi {
 
   private final Context context;
-  private final UserEntityJsonMapper entityJsonMapper;
+  private final UserEntityJsonMapper userEntityJsonMapper;
 
   /**
    * Constructor of the class
    *
-   * @param context {@link android.content.Context}.
-   * @param entityJsonMapper {@link UserEntityJsonMapper}.
+   * @param context {@link Context}.
+   * @param userEntityJsonMapper {@link UserEntityJsonMapper}.
    */
-  public RestApiImpl(Context context, UserEntityJsonMapper entityJsonMapper) {
-    if (context == null || entityJsonMapper == null) {
+  public RestApiImpl(Context context, UserEntityJsonMapper userEntityJsonMapper) {
+    if (context == null || userEntityJsonMapper == null) {
       throw new IllegalArgumentException("The constructor parameters cannot be null!!!");
     }
     this.context = context.getApplicationContext();
-    this.entityJsonMapper = entityJsonMapper;
+    this.userEntityJsonMapper = userEntityJsonMapper;
   }
 
-  @RxLogObservable
   @Override public Observable<List<UserEntity>> userEntityList() {
-    return Observable.create(subscriber -> {
+    return Observable.create(emitter -> {
       if (isThereInternetConnection()) {
         try {
           String responseUserEntities = getUserEntitiesFromApi();
           if (responseUserEntities != null) {
-            subscriber.onNext(entityJsonMapper.transformUserEntityCollection(responseUserEntities));
-            subscriber.onCompleted();
+            emitter.onNext(userEntityJsonMapper.transformUserEntityCollection(
+                responseUserEntities));
+            emitter.onComplete();
           } else {
-            subscriber.onError(new NetworkConnectionException());
+            emitter.onError(new NetworkConnectionException());
           }
         } catch (Exception e) {
-          subscriber.onError(new NetworkConnectionException(e.getCause()));
+          emitter.onError(new NetworkConnectionException(e.getCause()));
         }
       } else {
-        subscriber.onError(new NetworkConnectionException());
+        emitter.onError(new NetworkConnectionException());
       }
     });
   }
 
-  @RxLogObservable
   @Override public Observable<UserEntity> userEntityById(final int userId) {
-    return Observable.create(subscriber -> {
+    return Observable.create(emitter -> {
       if (isThereInternetConnection()) {
         try {
           String responseUserDetails = getUserDetailsFromApi(userId);
           if (responseUserDetails != null) {
-            subscriber.onNext(entityJsonMapper.transformUserEntity(responseUserDetails));
-            subscriber.onCompleted();
+            emitter.onNext(userEntityJsonMapper.transformUserEntity(responseUserDetails));
+            emitter.onComplete();
           } else {
-            subscriber.onError(new NetworkConnectionException());
+            emitter.onError(new NetworkConnectionException());
           }
         } catch (Exception e) {
-          subscriber.onError(new NetworkConnectionException(e.getCause()));
+          emitter.onError(new NetworkConnectionException(e.getCause()));
         }
       } else {
-        subscriber.onError(new NetworkConnectionException());
+        emitter.onError(new NetworkConnectionException());
       }
     });
   }

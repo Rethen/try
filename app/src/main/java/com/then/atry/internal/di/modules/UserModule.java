@@ -15,17 +15,12 @@
  */
 package com.then.atry.internal.di.modules;
 
-import com.then.atry.domain.RequestFilter;
-import com.then.atry.domain.net.HttpApiManager;
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
-import com.then.atry.domain.interactor.BusinessUseCase;
-import com.then.atry.domain.interactor.ehome.CpfUseCase;
-import com.then.atry.domain.interactor.ehome.OauthUseCase;
-import com.then.atry.domain.interactor.sample.GetUserDetails;
-import com.then.atry.domain.interactor.sample.GetUserList;
+import com.then.atry.domain.interactor.GetUserDetails;
+import com.then.atry.domain.interactor.GetUserList;
 import com.then.atry.domain.interactor.UseCase;
-import com.then.atry.domain.repository.sample.UserRepository;
+import com.then.atry.domain.repository.UserRepository;
 import com.then.atry.internal.di.PerActivity;
 
 import javax.inject.Named;
@@ -59,30 +54,12 @@ public class UserModule {
     @PerActivity
     @Named("userDetails")
     UseCase provideGetUserDetailsUseCase(
-            UserRepository userRepository, ThreadExecutor threadExecutor, RequestFilter requestFilter,
+            UserRepository userRepository, ThreadExecutor threadExecutor,
             PostExecutionThread postExecutionThread) {
-        return new GetUserDetails(userId, userRepository, threadExecutor, postExecutionThread, requestFilter);
+        return new GetUserDetails(userRepository, threadExecutor, postExecutionThread);
     }
 
 
-    @Provides
-    @PerActivity
-    @Named("oauthCase")
-    UseCase provideOauthCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread, RequestFilter requestFilter, HttpApiManager httpApiManager) {
-        return new OauthUseCase(threadExecutor, postExecutionThread, requestFilter, httpApiManager);
-    }
 
-    @Provides
-    @PerActivity
-    @Named("cpfCase")
-    UseCase provideCpfCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread, RequestFilter requestFilter, HttpApiManager httpApiManager) {
-        return new CpfUseCase(threadExecutor, postExecutionThread, requestFilter, httpApiManager);
-    }
-
-    @Provides
-    @PerActivity
-    BusinessUseCase provideBusinessCase(@Named("cpfCase") UseCase cpfCase, @Named("oauthCase") UseCase oauthCase, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread, RequestFilter requestFilter) {
-        return new BusinessUseCase(cpfCase, oauthCase, threadExecutor, postExecutionThread, requestFilter);
-    }
 
 }

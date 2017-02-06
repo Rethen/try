@@ -13,13 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.then.atry.domain.executor;
+package com.then.atry.data.repository.datasource;
 
-import java.util.concurrent.Executor;
+import com.then.atry.data.entity.UserEntity;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
- * Executor implementation can be based on different frameworks or techniques of asynchronous
- * execution, but every implementation will execute the
- * {@link com.fernandocejas.android10.sample.domain.interactor.UseCase} out of the UI thread.
+ * Interface that represents a data store from where data is retrieved.
  */
-public interface ThreadExecutor extends Executor {}
+public interface UserDataStore {
+  /**
+   * Get an {@link Observable} which will emit a List of {@link UserEntity}.
+   */
+  Observable<List<UserEntity>> userEntityList();
+
+  /**
+   * Get an {@link Observable} which will emit a {@link UserEntity} by its id.
+   *
+   * @param userId The id to retrieve user data.
+   */
+  Observable<UserEntity> userEntityDetails(final int userId);
+}

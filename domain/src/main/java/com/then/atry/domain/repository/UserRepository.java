@@ -13,13 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.then.atry.domain.executor;
+package com.then.atry.domain.repository;
 
-import java.util.concurrent.Executor;
+import com.then.atry.domain.User;
+
+import java.util.List;
+
+import io.reactivex.Observable;
+
 
 /**
- * Executor implementation can be based on different frameworks or techniques of asynchronous
- * execution, but every implementation will execute the
- * {@link com.fernandocejas.android10.sample.domain.interactor.UseCase} out of the UI thread.
+ * Interface that represents a Repository for getting {@link User} related data.
  */
-public interface ThreadExecutor extends Executor {}
+public interface UserRepository {
+  /**
+   * Get an {@link Observable} which will emit a List of {@link User}.
+   */
+  Observable<List<User>> users();
+
+  /**
+   * Get an {@link Observable} which will emit a {@link User}.
+   *
+   * @param userId The user id used to retrieve user data.
+   */
+  Observable<User> user(final int userId);
+}
