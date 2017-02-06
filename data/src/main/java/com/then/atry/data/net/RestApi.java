@@ -25,6 +25,7 @@ import io.reactivex.Observable;
  * RestApi for retrieving data from the network.
  */
 public interface RestApi {
+
   String API_BASE_URL =
       "https://raw.githubusercontent.com/android10/Sample-Data/master/Android-CleanArchitecture/";
 

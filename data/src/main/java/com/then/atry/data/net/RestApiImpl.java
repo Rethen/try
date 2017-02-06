@@ -34,6 +34,7 @@ import io.reactivex.Observable;
 public class RestApiImpl implements RestApi {
 
   private final Context context;
+
   private final UserEntityJsonMapper userEntityJsonMapper;
 
   /**

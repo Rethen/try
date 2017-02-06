@@ -14,19 +14,19 @@ import com.kymjs.themvp.viewmodel.BaseViewModel;
 import com.then.atry.BR;
 import com.then.atry.R;
 import com.then.atry.activity.main.MainActivity;
-import com.then.atry.data.viewmodel.ListViewModel;
-import com.then.atry.data.viewmodel.MessageHubViewModel;
 import com.then.atry.databinding.MessageHubFragmentBinding;
 import com.then.atry.domain.User;
 import com.then.atry.domain.interactor.DefaultObserver;
+import com.then.atry.domain.interactor.ehome.cpf.sys.GetSysInfo;
 import com.then.atry.domain.interactor.UseCase;
 import com.then.atry.fragment.BaseFragment;
+import com.then.atry.viewmodel.ListViewModel;
+import com.then.atry.viewmodel.MessageHubViewModel;
 
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
 
 
 /**
@@ -40,6 +40,10 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
     @Named("userList")
     UseCase useCase;
 
+
+    @Inject
+    @Named("sysInfo")
+    UseCase sysUseCase;
 
     private ObservableList items;
 
@@ -73,10 +77,11 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
             items.add(messageHubViewModel);
         }
 
-        ListViewModel  listViewModel = new ListViewModel(items, R.layout.message_hub_item, BR.item);
+        ListViewModel listViewModel = new ListViewModel(items, R.layout.message_hub_item, BR.item);
 
-        useCase.execute(new GetUserListSubscriber(),null);
+        useCase.execute(new GetUserListSubscriber(), null);
 
+        sysUseCase.execute(new GetUserListSubscriber(), GetSysInfo.Params.forSys("kldgkl"));
 
         binding.setListViewModel(listViewModel);
 

@@ -22,9 +22,11 @@ import com.then.atry.application.App;
 import com.then.atry.data.cache.UserCache;
 import com.then.atry.data.cache.UserCacheImpl;
 import com.then.atry.data.executor.JobExecutor;
+import com.then.atry.data.repository.SysDataRepository;
 import com.then.atry.data.repository.UserDataRepository;
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
+import com.then.atry.domain.repository.SysRepository;
 import com.then.atry.domain.repository.UserRepository;
 
 import javax.inject.Singleton;
@@ -66,6 +68,24 @@ public class ApplicationModule {
     @Singleton
     UserCache provideUserCache(UserCacheImpl userCache) {
         return userCache;
+    }
+
+   /* @Provides
+    @Singleton
+    HttpApiManager provideHttpApiManager(HttpApiManager httpApiManager) {
+        return httpApiManager;
+    }*/
+
+    /*@Provides
+    @Singleton
+    OrgRepository provideOrgRepository(OrgDataRepository orgDataRepository) {
+        return orgDataRepository;
+    }*/
+
+    @Provides
+    @Singleton
+    SysRepository provideSysRepository(SysDataRepository sysDataRepository) {
+        return sysDataRepository;
     }
 
     @Provides

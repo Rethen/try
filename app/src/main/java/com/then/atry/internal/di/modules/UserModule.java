@@ -15,12 +15,10 @@
  */
 package com.then.atry.internal.di.modules;
 
-import com.then.atry.domain.executor.PostExecutionThread;
-import com.then.atry.domain.executor.ThreadExecutor;
+import com.then.atry.domain.interactor.ehome.cpf.sys.GetSysInfo;
 import com.then.atry.domain.interactor.GetUserDetails;
 import com.then.atry.domain.interactor.GetUserList;
 import com.then.atry.domain.interactor.UseCase;
-import com.then.atry.domain.repository.UserRepository;
 import com.then.atry.internal.di.PerActivity;
 
 import javax.inject.Named;
@@ -34,13 +32,9 @@ import dagger.Provides;
 @Module
 public class UserModule {
 
-    private int userId = -1;
 
     public UserModule() {
-    }
 
-    public UserModule(int userId) {
-        this.userId = userId;
     }
 
     @Provides
@@ -53,13 +47,15 @@ public class UserModule {
     @Provides
     @PerActivity
     @Named("userDetails")
-    UseCase provideGetUserDetailsUseCase(
-            UserRepository userRepository, ThreadExecutor threadExecutor,
-            PostExecutionThread postExecutionThread) {
-        return new GetUserDetails(userRepository, threadExecutor, postExecutionThread);
+    UseCase provideGetUserDetailsUseCase(GetUserDetails getUserDetails) {
+        return getUserDetails;
     }
 
-
-
+    @Provides
+    @PerActivity
+    @Named("sysInfo")
+    UseCase provideGetSysInfoUseCase(GetSysInfo getSysInfo) {
+        return getSysInfo;
+    }
 
 }

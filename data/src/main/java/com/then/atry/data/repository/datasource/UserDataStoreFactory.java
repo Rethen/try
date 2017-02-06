@@ -33,6 +33,7 @@ import javax.inject.Singleton;
 public class UserDataStoreFactory {
 
   private final Context context;
+
   private final UserCache userCache;
 
   @Inject

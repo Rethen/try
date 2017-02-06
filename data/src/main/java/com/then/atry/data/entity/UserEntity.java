@@ -17,9 +17,6 @@ package com.then.atry.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * User Entity used in the data layer.
- */
 public class UserEntity {
 
   @SerializedName("id")

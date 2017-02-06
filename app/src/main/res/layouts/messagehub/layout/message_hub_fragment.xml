@@ -6,7 +6,7 @@
 
         <variable
             name="listViewModel"
-            type="com.then.atry.data.viewmodel.ListViewModel" />
+            type="com.then.atry.viewmodel.ListViewModel" />
 
         <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
 
