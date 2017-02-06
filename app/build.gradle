@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.antfortune.freeline'
+apply plugin: 'com.baoyz.treasure'
+
+
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+
+
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/messagehub',
+                            'src/main/res/layouts/mainframe',
+                            'src/main/res/layouts/contacts',
+                            'src/main/res/layouts/chat',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
+
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile rootProject.ext.dependencies["appcompat-v7"]
+    compile rootProject.ext.dependencies["support-v4"]
+    compile rootProject.ext.dependencies["design"]
+    compile rootProject.ext.dependencies["cardview-v7"]
+    compile rootProject.ext.dependencies["material-values"]
+    compile rootProject.ext.dependencies["permissions"]
+    compile rootProject.ext.dependencies["xlog"]
+    compile rootProject.ext.dependencies["multidex"]
+    compile rootProject.ext.dependencies["retrofit2"]
+    compile rootProject.ext.dependencies["rx-android"]
+    compile rootProject.ext.dependencies["converter-gson"]
+    compile rootProject.ext.dependencies["dagger"]
+    compile rootProject.ext.dependencies["fairyplugin"]
+    provided rootProject.ext.dependencies["dagger-compiler"]
+
+
+
+
+    testCompile 'junit:junit:4.12'
+
+    compile project(path: ':data')
+
+}

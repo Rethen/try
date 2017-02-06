@@ -1,0 +1,35 @@
+apply plugin: 'java'
+
+//noinspection GroovyUnusedAssignment
+sourceCompatibility = 1.7
+//noinspection GroovyUnusedAssignment
+targetCompatibility = 1.7
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main {
+        compileClasspath += configurations.provided
+    }
+}
+
+dependencies {
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile rootProject.ext.dependencies["javax-annotation"]
+    compile rootProject.ext.dependencies["javax-inject"]
+
+    compile rootProject.ext.dependencies["retrofit2"]
+    compile rootProject.ext.dependencies["converter-fastjson"]
+    compile rootProject.ext.dependencies["rx-java"]
+    compile rootProject.ext.dependencies["adapter-rxjava"]
+
+
+
+    testCompile rootProject.ext.testDependencies["junit"]
+    testCompile rootProject.ext.testDependencies["mockito"]
+    compile rootProject.ext.dependencies["gson"]
+}

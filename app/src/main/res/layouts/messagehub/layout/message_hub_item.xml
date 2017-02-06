@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.then.atry.data.viewmodel.MessageHubViewModel">
+
+        </variable>
+
+        <import type="android.view.View"></import>
+    </data>
+
+
+    <RelativeLayout
+        android:id="@+id/item_message_hub_message_content_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{item::onClick}">
+
+
+        <TextView
+            android:id="@+id/item_message_hub_title"
+            android:layout_width="wrap_content"
+            android:onClick="@{item::onClick}"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="@{item.title}" />
+
+
+    </RelativeLayout>
+
+
+</layout>

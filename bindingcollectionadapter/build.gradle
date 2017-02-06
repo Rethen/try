@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'signing'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        androidTest {
+            res {
+                srcDirs = ['src/androidTest/res']
+            }
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    //noinspection GradleDependency,GradleCompatible
+    compile rootProject.ext.dependencies["support-v4"]
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:1.7.1'
+    testCompile 'org.mockito:mockito-core:2.0.44-beta'
+
+    androidTestCompile fileTree(dir: 'testLibs', include: '*.jar')
+    androidTestCompile 'com.android.support.test:runner:0.4'
+    androidTestCompile 'com.android.support.test:rules:0.4'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+    androidTestCompile 'com.squareup.assertj:assertj-android:1.1.0'
+}
+
+

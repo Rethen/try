@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/bottom_nav">
+
+        <item
+            android:id="@+id/bottom_nav_message"
+            android:enabled="true"
+            android:icon="@drawable/ic_bottom_navigation_message"
+            android:title="@string/text_message" />
+        <item
+            android:id="@+id/bottom_nav_schedules"
+            android:enabled="true"
+            android:icon="@drawable/ic_bottom_navigation_group"
+            android:title="@string/text_schedules" />
+        <item
+            android:id="@+id/bottom_nav_music"
+            android:enabled="true"
+            android:icon="@drawable/ic_bottom_navigation_message"
+            android:title="@string/text_music" />
+    </group>
+
+</menu>

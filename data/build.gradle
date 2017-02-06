@@ -1,0 +1,81 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.fernandocejas.frodo'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'realm-android'
+
+
+
+android {
+    defaultPublishConfig "debug"
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+    }
+
+
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+        disable 'InvalidPackage'  // Some libraries have issues with this
+        disable 'OldTargetApi'
+        // Due to Robolectric that modifies the manifest when running tests
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile project(':domain')
+
+    compile project(path: ':themvp')
+
+    compile project(path: ':bindingcollectionadapter')
+
+    compile project(path: ':bindingcollectionadapter-recyclerview')
+
+    compile rootProject.ext.dependencies["javax-annotation"]
+
+    compile rootProject.ext.dependencies["okhttp3"]
+
+    compile rootProject.ext.dependencies["javax-inject"]
+
+    compile rootProject.ext.dependencies["gson"]
+
+    compile rootProject.ext.dependencies["rx-android"]
+
+    compile rootProject.ext.dependencies["android-annotations"]
+
+    compile rootProject.ext.dependencies["simplepreferences"]
+
+    apt rootProject.ext.dependencies["simplepreferences-processor"]
+
+    testCompile rootProject.ext.testDependencies["junit"]
+
+    testCompile rootProject.ext.testDependencies["assertj-core"]
+
+    testCompile rootProject.ext.testDependencies["mockito"]
+
+    testCompile rootProject.ext.testDependencies["robolectric"]
+
+}
