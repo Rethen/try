@@ -68,6 +68,8 @@ dependencies {
 
     compile rootProject.ext.dependencies["rx-android"]
 
+    compile rootProject.ext.dependencies["converter-gson"]
+
     compile rootProject.ext.dependencies["android-annotations"]
 
     compile rootProject.ext.dependencies["simplepreferences"]
@@ -81,5 +83,8 @@ dependencies {
     testCompile rootProject.ext.testDependencies["mockito"]
 
     testCompile rootProject.ext.testDependencies["robolectric"]
+
+
+
 
 }

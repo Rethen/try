@@ -19,6 +19,8 @@ import com.then.atry.domain.interactor.ehome.cpf.sys.GetSysInfo;
 import com.then.atry.domain.interactor.GetUserDetails;
 import com.then.atry.domain.interactor.GetUserList;
 import com.then.atry.domain.interactor.UseCase;
+import com.then.atry.domain.interactor.ehome.cpf.sys.GetSysList;
+import com.then.atry.domain.interactor.ehome.oauth.AccountLogin;
 import com.then.atry.internal.di.PerActivity;
 
 import javax.inject.Named;
@@ -56,6 +58,20 @@ public class UserModule {
     @Named("sysInfo")
     UseCase provideGetSysInfoUseCase(GetSysInfo getSysInfo) {
         return getSysInfo;
+    }
+
+    @Provides
+    @PerActivity
+    @Named("sysList")
+    UseCase provideGetSysListUseCase(GetSysList getSysList) {
+        return getSysList;
+    }
+
+    @Provides
+    @PerActivity
+    @Named("login")
+    UseCase provideLoginUseCase(AccountLogin accountLogin) {
+        return accountLogin;
     }
 
 }

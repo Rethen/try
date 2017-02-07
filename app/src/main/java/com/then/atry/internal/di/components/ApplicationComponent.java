@@ -20,6 +20,7 @@ import android.content.Context;
 
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
+import com.then.atry.domain.repository.LoginRepository;
 import com.then.atry.domain.repository.SysRepository;
 import com.then.atry.domain.repository.UserRepository;
 import com.then.atry.internal.di.modules.ApplicationModule;
@@ -48,4 +49,5 @@ public interface ApplicationComponent {
 
     SysRepository sysRepository();
 
+    LoginRepository loginRepository();
 }

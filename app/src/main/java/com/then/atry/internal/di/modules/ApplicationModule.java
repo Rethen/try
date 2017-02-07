@@ -22,10 +22,13 @@ import com.then.atry.application.App;
 import com.then.atry.data.cache.UserCache;
 import com.then.atry.data.cache.UserCacheImpl;
 import com.then.atry.data.executor.JobExecutor;
+import com.then.atry.data.pref.RequestPrefs;
+import com.then.atry.data.repository.LoginDataRepository;
 import com.then.atry.data.repository.SysDataRepository;
 import com.then.atry.data.repository.UserDataRepository;
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
+import com.then.atry.domain.repository.LoginRepository;
 import com.then.atry.domain.repository.SysRepository;
 import com.then.atry.domain.repository.UserRepository;
 
@@ -70,11 +73,6 @@ public class ApplicationModule {
         return userCache;
     }
 
-   /* @Provides
-    @Singleton
-    HttpApiManager provideHttpApiManager(HttpApiManager httpApiManager) {
-        return httpApiManager;
-    }*/
 
     /*@Provides
     @Singleton
@@ -92,6 +90,18 @@ public class ApplicationModule {
     @Singleton
     UserRepository provideUserRepository(UserDataRepository userDataRepository) {
         return userDataRepository;
+    }
+
+    @Provides
+    @Singleton
+    LoginRepository provideLoginRepository(LoginDataRepository loginDataRepository) {
+        return loginDataRepository;
+    }
+
+    @Provides
+    @Singleton
+    RequestPrefs provideRequestPref() {
+        return RequestPrefs.create(application);
     }
 
 

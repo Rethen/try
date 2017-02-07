@@ -49,6 +49,7 @@ public class RestApiImpl implements RestApi {
     }
     this.context = context.getApplicationContext();
     this.userEntityJsonMapper = userEntityJsonMapper;
+
   }
 
   @Override public Observable<List<UserEntity>> userEntityList() {

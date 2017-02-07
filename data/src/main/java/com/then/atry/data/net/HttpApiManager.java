@@ -1,6 +1,8 @@
 package com.then.atry.data.net;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.then.atry.data.net.helper.HttpHelper;
+import com.then.atry.data.process.json.factory.SimpleJsonConverterFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -59,9 +61,11 @@ public class HttpApiManager {
 
     private OkHttpClient fileOkHttpClient;
 
+    private final HttpHelper httpHelper;
+
 
     @Inject
-    HttpApiManager() {
+    HttpApiManager(HttpHelper httpHelper) {
 
         oauthHttpUrl = new HttpUrl.Builder().scheme(SCHEME).host(OAUTH_URL).port(OAUTH_PORT).build();
 
@@ -74,6 +78,7 @@ public class HttpApiManager {
         //文件下载，连接超时时间依然设置为10秒，读取超时设置为2小时
         fileOkHttpClient = new OkHttpClient.Builder().connectTimeout(10, TimeUnit.SECONDS).readTimeout(120, TimeUnit.MINUTES).build();
 
+        this.httpHelper = httpHelper;
     }
 
 
@@ -81,6 +86,7 @@ public class HttpApiManager {
         return new Retrofit.Builder()
                 .baseUrl(httpUrl)
                 .client(okHttpClient)
+                .addConverterFactory(SimpleJsonConverterFactory.create(httpHelper))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }

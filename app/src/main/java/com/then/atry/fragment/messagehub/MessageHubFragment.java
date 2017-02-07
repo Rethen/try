@@ -14,11 +14,13 @@ import com.kymjs.themvp.viewmodel.BaseViewModel;
 import com.then.atry.BR;
 import com.then.atry.R;
 import com.then.atry.activity.main.MainActivity;
+import com.then.atry.data.process.HttpResult;
 import com.then.atry.databinding.MessageHubFragmentBinding;
+import com.then.atry.domain.Oauth;
 import com.then.atry.domain.User;
 import com.then.atry.domain.interactor.DefaultObserver;
-import com.then.atry.domain.interactor.ehome.cpf.sys.GetSysInfo;
 import com.then.atry.domain.interactor.UseCase;
+import com.then.atry.domain.interactor.ehome.oauth.AccountLogin;
 import com.then.atry.fragment.BaseFragment;
 import com.then.atry.viewmodel.ListViewModel;
 import com.then.atry.viewmodel.MessageHubViewModel;
@@ -44,6 +46,15 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
     @Inject
     @Named("sysInfo")
     UseCase sysUseCase;
+
+
+    @Inject
+    @Named("sysList")
+    UseCase sysListUseCase;
+
+    @Inject
+    @Named("login")
+    UseCase loginUseCase;
 
     private ObservableList items;
 
@@ -79,9 +90,11 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
 
         ListViewModel listViewModel = new ListViewModel(items, R.layout.message_hub_item, BR.item);
 
-        useCase.execute(new GetUserListSubscriber(), null);
+//        useCase.execute(new GetUserListSubscriber(), null);
+//
+//        sysListUseCase.execute(new GetUserListSubscriber(), GetSysInfo.Params.forSys("kldgkl"));
 
-        sysUseCase.execute(new GetUserListSubscriber(), GetSysInfo.Params.forSys("kldgkl"));
+        loginUseCase.execute(new OauthObserver(), AccountLogin.Params.forLogin("18650725014", "12345678"));
 
         binding.setListViewModel(listViewModel);
 
@@ -121,6 +134,18 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
         @Override
         public void onNext(List<User> users) {
             Log.d("GetUserListSubscriber", "users.size():" + users.size());
+        }
+    }
+
+    private  static  class OauthObserver extends DefaultObserver<HttpResult<Oauth>>{
+        @Override
+        public void onNext(HttpResult<Oauth> result) {
+            Log.d("OauthObserver", result.getSource());
+        }
+
+        @Override
+        public void onError(Throwable exception) {
+           exception.printStackTrace();
         }
     }
 
