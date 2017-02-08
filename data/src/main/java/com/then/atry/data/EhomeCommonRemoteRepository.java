@@ -1,5 +1,7 @@
 package com.then.atry.data;
 
+import com.then.atry.data.process.HttpResult;
+
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -15,5 +17,5 @@ public interface EhomeCommonRemoteRepository {
     String PATH = "ehome.rest";
 
     @POST(PATH)
-    Observable<Object> req(@Header("ehome-head-params") String header, @Body RequestBody content);
+    Observable<HttpResult> req(@Header("ehome-head-params") String header, @Body RequestBody content);
 }

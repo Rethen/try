@@ -14,7 +14,6 @@ import com.kymjs.themvp.viewmodel.BaseViewModel;
 import com.then.atry.BR;
 import com.then.atry.R;
 import com.then.atry.activity.main.MainActivity;
-import com.then.atry.data.process.HttpResult;
 import com.then.atry.databinding.MessageHubFragmentBinding;
 import com.then.atry.domain.Oauth;
 import com.then.atry.domain.User;
@@ -94,7 +93,7 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
 //
 //        sysListUseCase.execute(new GetUserListSubscriber(), GetSysInfo.Params.forSys("kldgkl"));
 
-        loginUseCase.execute(new OauthObserver(), AccountLogin.Params.forLogin("18650725014", "12345678"));
+        loginUseCase.execute(new OauthObserver(), AccountLogin.LoginParams.create("18650725014", "12345678"));
 
         binding.setListViewModel(listViewModel);
 
@@ -137,15 +136,16 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
         }
     }
 
-    private  static  class OauthObserver extends DefaultObserver<HttpResult<Oauth>>{
+    private static class OauthObserver extends DefaultObserver<Oauth> {
+
         @Override
-        public void onNext(HttpResult<Oauth> result) {
-            Log.d("OauthObserver", result.getSource());
+        public void onNext(Oauth result) {
+            Log.d("AccessToken:", result.getAccessToken());
         }
 
         @Override
         public void onError(Throwable exception) {
-           exception.printStackTrace();
+            exception.printStackTrace();
         }
     }
 

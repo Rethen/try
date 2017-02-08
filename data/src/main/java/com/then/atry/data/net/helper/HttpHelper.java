@@ -217,4 +217,8 @@ public class HttpHelper {
     public RequestPrefs getRequestPrefs() {
         return requestPrefs;
     }
+
+    public Gson getGson() {
+        return gson;
+    }
 }

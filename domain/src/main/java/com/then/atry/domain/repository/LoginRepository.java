@@ -11,6 +11,6 @@ import io.reactivex.Observable;
 
 public interface LoginRepository {
 
-    Observable<Oauth> login(AccountLogin.Params params);
+    Observable<Oauth> login(AccountLogin.LoginParams params);
 
 }

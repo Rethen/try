@@ -19,7 +19,7 @@ import retrofit2.Converter;
 /**
  * Created by 42524 on 2015/12/12.
  */
-public class SimpleResponseJsonConverter<T> implements Converter<ResponseBody, HttpResult> {
+public class SimpleResponseJsonConverter implements Converter<ResponseBody, HttpResult> {
 
 
     /**

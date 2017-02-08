@@ -1,16 +1,25 @@
 package com.then.atry.data.net;
 
+import com.google.gson.TypeAdapter;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.then.atry.data.EhomeCommonRemoteRepository;
 import com.then.atry.data.net.helper.HttpHelper;
 import com.then.atry.data.process.json.factory.SimpleJsonConverterFactory;
+import com.then.atry.domain.params.Params;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Observable;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 
 
@@ -102,10 +111,41 @@ public class HttpApiManager {
         return retrofit.create(clazz);
     }
 
+    public <T> T getService(Class<T> clazz, int serviceType) {
+        Retrofit retrofit = null;
+        if (serviceType == Params.OAUTH) {
+            retrofit = createNewRetrofit(oauthHttpUrl, okHttpClient);
+        } else if (serviceType == Params.CPF) {
+            retrofit = createNewRetrofit(cpfHttpUrl, okHttpClient);
+        }
+        return retrofit.create(clazz);
+    }
+
     public <T> T getFileService(Class<T> clazz) {
         Retrofit retrofit = createNewRetrofit(fileHttpUrl, fileOkHttpClient);
         return retrofit.create(clazz);
     }
 
+
+    public  <T> Observable<T> request(Params params,Class<T> clazz) {
+        String header = httpHelper.createHttpHeader(params.takeSn(), params);
+        RequestBody requestBody = httpHelper.createRequestBody(params);
+        return getService(EhomeCommonRemoteRepository.class, params.takeService()).req(header, requestBody).flatMap(httpResult -> {
+            T result = null;
+            if (httpResult.getError() != null) {
+
+            } else {
+                TypeToken typeToken = params.takeTypeToken();
+                TypeAdapter adapter = httpHelper.getGson().getAdapter(typeToken);
+                JsonReader jsonReader = httpHelper.getGson().newJsonReader(new StringReader(httpResult.getSource()));
+                try {
+                    result = (T) adapter.read(jsonReader);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return Observable.just(result);
+        });
+    }
 
 }
