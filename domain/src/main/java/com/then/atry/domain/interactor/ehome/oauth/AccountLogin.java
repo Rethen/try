@@ -32,8 +32,7 @@ public class AccountLogin extends UseCase<Oauth, AccountLogin.LoginParams> {
         return loginRepository.login(params);
     }
 
-
-    public static final class LoginParams implements Params {
+    public static final class LoginParams implements Params<Oauth> {
 
         private String loginName;
 
@@ -48,8 +47,9 @@ public class AccountLogin extends UseCase<Oauth, AccountLogin.LoginParams> {
             return new LoginParams(userName, password);
         }
 
-        public TypeToken takeTypeToken() {
-            return new TypeToken<Oauth>(){};
+        public TypeToken<Oauth> takeTypeToken() {
+            return new TypeToken<Oauth>() {
+            };
         }
 
         @Override

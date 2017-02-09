@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.then.atry.data.net.HttpApiManager;
 import com.then.atry.domain.Sys;
+import com.then.atry.domain.interactor.ehome.cpf.sys.GetSysList;
 import com.then.atry.domain.repository.SysRepository;
 
 import java.util.List;
@@ -32,9 +33,8 @@ public class SysDataRepository implements SysRepository {
     }
 
     @Override
-    public Observable<List<Sys>> sysList() {
-        Log.d("SysDataRepository", "sysList:");
-        return null;
+    public Observable<List<Sys>> sysList(GetSysList.SysListParams params) {
+        return httpApiManager.request(params);
     }
 
 }

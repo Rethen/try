@@ -29,7 +29,7 @@ import com.kymjs.themvp.view.IDelegate;
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
 public abstract class DataBindActivity<T extends IDelegate, D extends ViewDataBinding> extends
-        ActivityPresenter<T> {
+        ActivityPresenter<T,D> {
     protected D binding;
 
     @Override

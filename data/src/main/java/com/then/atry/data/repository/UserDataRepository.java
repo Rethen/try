@@ -35,6 +35,7 @@ import io.reactivex.Observable;
 public class UserDataRepository implements UserRepository {
 
     private final UserDataStoreFactory userDataStoreFactory;
+
     private final UserEntityDataMapper userEntityDataMapper;
 
     /**

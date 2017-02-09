@@ -21,7 +21,6 @@ import android.content.Context;
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
 import com.then.atry.domain.repository.LoginRepository;
-import com.then.atry.domain.repository.SysRepository;
 import com.then.atry.domain.repository.UserRepository;
 import com.then.atry.internal.di.modules.ApplicationModule;
 
@@ -32,7 +31,7 @@ import dagger.Component;
 /**
  * A component whose lifetime is the life of the application.
  */
-@Singleton // Constraints this component to one-per-application or unscoped bindings.
+@Singleton
 @Component(modules = {ApplicationModule.class})
 public interface ApplicationComponent {
 
@@ -46,8 +45,6 @@ public interface ApplicationComponent {
     PostExecutionThread postExecutionThread();
 
     UserRepository userRepository();
-
-    SysRepository sysRepository();
 
     LoginRepository loginRepository();
 }

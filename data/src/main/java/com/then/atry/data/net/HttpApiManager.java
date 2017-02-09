@@ -112,13 +112,12 @@ public class HttpApiManager {
     }
 
     public <T> T getService(Class<T> clazz, int serviceType) {
-        Retrofit retrofit = null;
         if (serviceType == Params.OAUTH) {
-            retrofit = createNewRetrofit(oauthHttpUrl, okHttpClient);
+            return getOauthService(clazz);
         } else if (serviceType == Params.CPF) {
-            retrofit = createNewRetrofit(cpfHttpUrl, okHttpClient);
+            return getCPFService(clazz);
         }
-        return retrofit.create(clazz);
+        return null;
     }
 
     public <T> T getFileService(Class<T> clazz) {
@@ -127,7 +126,7 @@ public class HttpApiManager {
     }
 
 
-    public  <T> Observable<T> request(Params params,Class<T> clazz) {
+    public <T> Observable<T> request(Params<T> params) {
         String header = httpHelper.createHttpHeader(params.takeSn(), params);
         RequestBody requestBody = httpHelper.createRequestBody(params);
         return getService(EhomeCommonRemoteRepository.class, params.takeService()).req(header, requestBody).flatMap(httpResult -> {
@@ -135,7 +134,7 @@ public class HttpApiManager {
             if (httpResult.getError() != null) {
 
             } else {
-                TypeToken typeToken = params.takeTypeToken();
+                TypeToken typeToken=params.takeTypeToken();
                 TypeAdapter adapter = httpHelper.getGson().getAdapter(typeToken);
                 JsonReader jsonReader = httpHelper.getGson().newJsonReader(new StringReader(httpResult.getSource()));
                 try {

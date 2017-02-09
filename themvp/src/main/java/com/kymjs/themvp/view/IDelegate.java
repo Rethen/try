@@ -28,8 +28,8 @@ import android.view.ViewGroup;
  *
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
-public interface IDelegate {
-    <D extends ViewDataBinding> D create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+public interface IDelegate<D extends ViewDataBinding> {
+     D create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     int getOptionsMenuId();
 

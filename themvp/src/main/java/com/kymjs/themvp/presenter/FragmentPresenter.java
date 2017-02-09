@@ -18,7 +18,6 @@ package com.kymjs.themvp.presenter;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +26,7 @@ import android.view.ViewGroup;
 
 import com.kymjs.themvp.view.IDelegate;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 /**
  * Presenter base class for Fragment
@@ -35,7 +35,7 @@ import com.kymjs.themvp.viewmodel.BaseViewModel;
  * @param <T> View delegate class type
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
-public abstract class FragmentPresenter<T extends IDelegate> extends Fragment implements BaseViewModel.ViewModelListener, View.OnClickListener,View.OnLongClickListener
+public abstract class FragmentPresenter<T extends IDelegate,D extends ViewDataBinding> extends RxFragment implements BaseViewModel.ViewModelListener, View.OnClickListener,View.OnLongClickListener
 {
     public T viewDelegate;
 
@@ -61,8 +61,8 @@ public abstract class FragmentPresenter<T extends IDelegate> extends Fragment im
         return viewDelegate.getRootView();
     }
 
-    protected <D extends ViewDataBinding> D createBinding(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return viewDelegate.create(inflater, container, savedInstanceState);
+    protected  D createBinding(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return (D) viewDelegate.create(inflater, container, savedInstanceState);
     }
 
     @Override

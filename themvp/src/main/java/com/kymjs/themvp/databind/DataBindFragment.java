@@ -29,7 +29,7 @@ import com.kymjs.themvp.view.IDelegate;
  * @author kymjs (http://www.kymjs.com/) on 10/26/15.
  */
 public abstract class DataBindFragment<T extends IDelegate, D extends ViewDataBinding> extends
-        FragmentPresenter<T> {
+        FragmentPresenter<T,D> {
 
     protected D binding;
 

@@ -24,12 +24,10 @@ import com.then.atry.data.cache.UserCacheImpl;
 import com.then.atry.data.executor.JobExecutor;
 import com.then.atry.data.pref.RequestPrefs;
 import com.then.atry.data.repository.LoginDataRepository;
-import com.then.atry.data.repository.SysDataRepository;
 import com.then.atry.data.repository.UserDataRepository;
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
 import com.then.atry.domain.repository.LoginRepository;
-import com.then.atry.domain.repository.SysRepository;
 import com.then.atry.domain.repository.UserRepository;
 
 import javax.inject.Singleton;
@@ -69,21 +67,15 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    UserCache provideUserCache(UserCacheImpl userCache) {
-        return userCache;
+    RequestPrefs provideRequestPref() {
+        return RequestPrefs.create(application);
     }
 
 
-    /*@Provides
-    @Singleton
-    OrgRepository provideOrgRepository(OrgDataRepository orgDataRepository) {
-        return orgDataRepository;
-    }*/
-
     @Provides
     @Singleton
-    SysRepository provideSysRepository(SysDataRepository sysDataRepository) {
-        return sysDataRepository;
+    UserCache provideUserCache(UserCacheImpl userCache) {
+        return userCache;
     }
 
     @Provides
@@ -97,12 +89,4 @@ public class ApplicationModule {
     LoginRepository provideLoginRepository(LoginDataRepository loginDataRepository) {
         return loginDataRepository;
     }
-
-    @Provides
-    @Singleton
-    RequestPrefs provideRequestPref() {
-        return RequestPrefs.create(application);
-    }
-
-
 }

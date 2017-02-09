@@ -25,8 +25,8 @@ public class LoginDataRepository implements LoginRepository {
     }
 
     @Override
-    public Observable login(AccountLogin.LoginParams params) {
-        return httpApiManager.request(params, Oauth.class).doOnNext(o -> Log.d("LoginDataRepository", o.getAccessToken()));
+    public Observable<Oauth> login(AccountLogin.LoginParams params) {
+        return httpApiManager.request(params).doOnNext(o -> Log.d("LoginDataRepository", o.getAccessToken()));
     }
 
 

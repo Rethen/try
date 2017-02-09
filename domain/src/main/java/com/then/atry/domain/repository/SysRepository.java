@@ -1,6 +1,7 @@
 package com.then.atry.domain.repository;
 
 import com.then.atry.domain.Sys;
+import com.then.atry.domain.interactor.ehome.cpf.sys.GetSysList;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface SysRepository {
 
     Observable<Sys> sys(String sysId);
 
-    Observable<List<Sys>> sysList();
+    Observable<List<Sys>> sysList(GetSysList.SysListParams params);
 }

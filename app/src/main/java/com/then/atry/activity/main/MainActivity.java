@@ -17,10 +17,6 @@ import com.then.atry.R;
 import com.then.atry.activity.BaseActivity;
 import com.then.atry.databinding.ActivityMainBinding;
 import com.then.atry.fragment.messagehub.MessageHubFragment;
-import com.then.atry.internal.di.components.DaggerUserComponent;
-import com.then.atry.internal.di.components.UserComponent;
-import com.then.atry.internal.di.modules.ActivityModule;
-import com.then.atry.internal.di.modules.UserModule;
 
 import java.util.ArrayList;
 
@@ -39,7 +35,7 @@ public class MainActivity extends BaseActivity<MainDelegate, ActivityMainBinding
 
     private FragmentTransaction ft;
 
-    private UserComponent userComponent;
+
 
 
     @Override
@@ -47,7 +43,6 @@ public class MainActivity extends BaseActivity<MainDelegate, ActivityMainBinding
         super.onCreate(savedInstanceState);
         ViewListenerManager.getInstance().reigester(this);
         initFragment();
-        userComponent=  DaggerUserComponent.builder().userModule(new UserModule()).activityModule(new ActivityModule(this)).applicationComponent(getAppComponment()).build();
     }
 
     @Override
@@ -181,7 +176,4 @@ public class MainActivity extends BaseActivity<MainDelegate, ActivityMainBinding
         ViewListenerManager.getInstance().unreigester(this);
     }
 
-    public UserComponent getUserComponent() {
-        return userComponent;
-    }
 }

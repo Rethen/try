@@ -17,7 +17,6 @@ package com.kymjs.themvp.presenter;
 
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,6 +25,7 @@ import android.view.ViewGroup;
 
 import com.kymjs.themvp.view.IDelegate;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 /**
  * Presenter base class for Activity
@@ -34,7 +34,7 @@ import com.kymjs.themvp.viewmodel.BaseViewModel;
  * @param <T> View delegate class type
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
-public abstract class ActivityPresenter<T extends IDelegate> extends AppCompatActivity implements BaseViewModel.ViewModelListener,View.OnClickListener,View.OnLongClickListener {
+public abstract class ActivityPresenter<T extends IDelegate,D extends ViewDataBinding> extends RxAppCompatActivity implements BaseViewModel.ViewModelListener,View.OnClickListener,View.OnLongClickListener {
     protected T viewDelegate;
 
     public ActivityPresenter() {
@@ -57,8 +57,8 @@ public abstract class ActivityPresenter<T extends IDelegate> extends AppCompatAc
         bindEvenListener();
     }
 
-    protected <D extends ViewDataBinding> D createBinding(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return viewDelegate.create(inflater, container, savedInstanceState);
+    protected D createBinding(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return (D) viewDelegate.create(inflater, container, savedInstanceState);
     }
 
     protected void bindEvenListener() {

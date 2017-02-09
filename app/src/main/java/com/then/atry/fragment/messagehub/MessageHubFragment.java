@@ -13,7 +13,6 @@ import com.kymjs.themvp.ViewListenerManager;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
 import com.then.atry.BR;
 import com.then.atry.R;
-import com.then.atry.activity.main.MainActivity;
 import com.then.atry.databinding.MessageHubFragmentBinding;
 import com.then.atry.domain.Oauth;
 import com.then.atry.domain.User;
@@ -21,8 +20,13 @@ import com.then.atry.domain.interactor.DefaultObserver;
 import com.then.atry.domain.interactor.UseCase;
 import com.then.atry.domain.interactor.ehome.oauth.AccountLogin;
 import com.then.atry.fragment.BaseFragment;
+import com.then.atry.internal.di.components.DaggerUserComponent;
+import com.then.atry.internal.di.components.UserComponent;
+import com.then.atry.internal.di.modules.ActivityModule;
+import com.then.atry.internal.di.modules.UserModule;
 import com.then.atry.viewmodel.ListViewModel;
 import com.then.atry.viewmodel.MessageHubViewModel;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.List;
 
@@ -42,20 +46,23 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
     UseCase useCase;
 
 
-    @Inject
-    @Named("sysInfo")
-    UseCase sysUseCase;
+//    @Inject
+//    @Named("sysInfo")
+//    UseCase sysUseCase;
 
 
-    @Inject
-    @Named("sysList")
-    UseCase sysListUseCase;
+//    @Inject
+//    @Named("sysList")
+//    UseCase sysListUseCase;
 
     @Inject
     @Named("login")
     UseCase loginUseCase;
 
     private ObservableList items;
+
+    private UserComponent userComponent;
+
 
     public MessageHubFragment() {
 
@@ -68,7 +75,9 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
       /*  PluginManagerHelper.installPlugin("/sdcard/chat.apk");
         Collection<PluginDescriptor> pluginDescriptors = PluginManagerHelper.getPlugins();
         Log.d("MessageHubFragment", "pluginDescriptors.size():" + pluginDescriptors.size());*/
-        ((MainActivity) getActivity()).getUserComponent().inject(this);
+        userComponent=  DaggerUserComponent.builder().userModule(new UserModule()).activityModule(new ActivityModule(getActivity())).applicationComponent(getAppComponment()).build();
+        userComponent.inject(this);
+
     }
 
 
@@ -93,13 +102,33 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
 //
 //        sysListUseCase.execute(new GetUserListSubscriber(), GetSysInfo.Params.forSys("kldgkl"));
 
-        loginUseCase.execute(new OauthObserver(), AccountLogin.LoginParams.create("18650725014", "12345678"));
+        final OauthObserver oauthObserver = new OauthObserver();
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+               loginUseCase.execute(oauthObserver, AccountLogin.LoginParams.create("18650725014", "12345678"), bindUntilEvent(FragmentEvent.PAUSE));
+            }
+        }).start();
+
 
         binding.setListViewModel(listViewModel);
 
         return binding;
     }
 
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("MessageHubFragment", "onPause");
+    }
 
     @Override
     public void actionViewModel(View view, BaseViewModel baseViewModel, int actionType) {
@@ -129,18 +158,19 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
     }
 
 
-    private static class GetUserListSubscriber extends DefaultObserver<List<User>> {
+    private class GetUserListSubscriber extends DefaultObserver<List<User>> {
         @Override
         public void onNext(List<User> users) {
             Log.d("GetUserListSubscriber", "users.size():" + users.size());
         }
     }
 
-    private static class OauthObserver extends DefaultObserver<Oauth> {
-
+    private class OauthObserver extends DefaultObserver<Oauth> {
         @Override
         public void onNext(Oauth result) {
-            Log.d("AccessToken:", result.getAccessToken());
+            Log.d("OauthObserver", "accessToken:" + result.getAccessToken());
+            MessageHubViewModel messageHubViewModel = (MessageHubViewModel) items.get(0);
+            messageHubViewModel.setTitle(result.getAccessToken());
         }
 
         @Override

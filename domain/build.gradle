@@ -26,8 +26,7 @@ dependencies {
     compile rootProject.ext.dependencies["converter-fastjson"]
     compile rootProject.ext.dependencies["rx-java"]
     compile rootProject.ext.dependencies["adapter-rxjava"]
-
-
+    compile rootProject.ext.dependencies["rxlifecycle"]
 
     testCompile rootProject.ext.testDependencies["junit"]
     testCompile rootProject.ext.testDependencies["mockito"]

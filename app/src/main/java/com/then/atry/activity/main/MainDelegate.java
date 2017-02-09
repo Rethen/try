@@ -8,12 +8,13 @@ import android.support.v7.widget.Toolbar;
 
 import com.kymjs.themvp.view.AppDelegate;
 import com.then.atry.R;
+import com.then.atry.databinding.ActivityMainBinding;
 
 /**
  * Created by then on 2016/12/6.
  */
 
-public class MainDelegate extends AppDelegate {
+public class MainDelegate extends AppDelegate<ActivityMainBinding> {
 
 
 

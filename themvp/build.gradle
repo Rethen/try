@@ -25,7 +25,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile rootProject.ext.dependencies["appcompat-v7"]
+    compile rootProject.ext.dependencies["rxlifecycle-android"]
+    compile rootProject.ext.dependencies["rxlifecycle-components"]
 }
 
 apply plugin: 'com.jfrog.bintray'

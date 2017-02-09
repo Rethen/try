@@ -32,15 +32,15 @@ import android.widget.Toast;
  *
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
-public abstract class AppDelegate implements IDelegate {
+public abstract class AppDelegate<D  extends ViewDataBinding> implements IDelegate<D> {
     protected final SparseArray<View> mViews = new SparseArray<View>();
 
     protected View rootView;
 
-    protected ViewDataBinding viewDataBinding;
+    protected D viewDataBinding;
 
     @Override
-    public <D extends ViewDataBinding> D create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public  D create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         int rootLayoutId = getRootLayoutId();
         D binding = DataBindingUtil.inflate(inflater, rootLayoutId, container, false);
         if (binding == null) {
