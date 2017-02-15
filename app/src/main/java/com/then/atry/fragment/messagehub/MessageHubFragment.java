@@ -20,8 +20,8 @@ import com.then.atry.domain.interactor.DefaultObserver;
 import com.then.atry.domain.interactor.UseCase;
 import com.then.atry.domain.interactor.ehome.oauth.AccountLogin;
 import com.then.atry.fragment.BaseFragment;
-import com.then.atry.internal.di.components.DaggerUserComponent;
-import com.then.atry.internal.di.components.UserComponent;
+import com.then.atry.internal.di.components.DaggerMessageHubFragmentComponent;
+import com.then.atry.internal.di.components.MessageHubFragmentComponent;
 import com.then.atry.internal.di.modules.ActivityModule;
 import com.then.atry.internal.di.modules.UserModule;
 import com.then.atry.viewmodel.ListViewModel;
@@ -61,7 +61,7 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
 
     private ObservableList items;
 
-    private UserComponent userComponent;
+    private MessageHubFragmentComponent messageHubFragmentComponent;
 
 
     public MessageHubFragment() {
@@ -75,8 +75,9 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
       /*  PluginManagerHelper.installPlugin("/sdcard/chat.apk");
         Collection<PluginDescriptor> pluginDescriptors = PluginManagerHelper.getPlugins();
         Log.d("MessageHubFragment", "pluginDescriptors.size():" + pluginDescriptors.size());*/
-        userComponent=  DaggerUserComponent.builder().userModule(new UserModule()).activityModule(new ActivityModule(getActivity())).applicationComponent(getAppComponment()).build();
-        userComponent.inject(this);
+        messageHubFragmentComponent = DaggerMessageHubFragmentComponent.builder().userModule(new UserModule()).activityModule(new ActivityModule(getActivity())).applicationComponent(getAppComponment()).build();
+        messageHubFragmentComponent.inject(this);
+
 
     }
 
@@ -113,7 +114,7 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-               loginUseCase.execute(oauthObserver, AccountLogin.LoginParams.create("18650725014", "12345678"), bindUntilEvent(FragmentEvent.PAUSE));
+                loginUseCase.execute(oauthObserver, AccountLogin.LoginParams.create("18650725014", "12345678"), bindUntilEvent(FragmentEvent.PAUSE));
             }
         }).start();
 

@@ -71,13 +71,6 @@ public class ApplicationModule {
         return RequestPrefs.create(application);
     }
 
-
-    @Provides
-    @Singleton
-    UserCache provideUserCache(UserCacheImpl userCache) {
-        return userCache;
-    }
-
     @Provides
     @Singleton
     UserRepository provideUserRepository(UserDataRepository userDataRepository) {
@@ -89,4 +82,14 @@ public class ApplicationModule {
     LoginRepository provideLoginRepository(LoginDataRepository loginDataRepository) {
         return loginDataRepository;
     }
+
+    @Provides
+    @Singleton
+    UserCache provideUserCache(UserCacheImpl userCache) {
+        return userCache;
+    }
+
+
+
+
 }

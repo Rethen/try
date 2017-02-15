@@ -15,13 +15,17 @@
  */
 package com.then.atry.internal.di.modules;
 
+import com.then.atry.data.cache.UserCache;
+import com.then.atry.data.cache.UserCacheImpl;
+import com.then.atry.data.repository.UserDataRepository;
 import com.then.atry.domain.interactor.GetUserDetails;
 import com.then.atry.domain.interactor.GetUserList;
 import com.then.atry.domain.interactor.UseCase;
-import com.then.atry.domain.interactor.ehome.oauth.AccountLogin;
+import com.then.atry.domain.repository.UserRepository;
 import com.then.atry.internal.di.PerActivity;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -51,12 +55,7 @@ public class UserModule {
         return getUserDetails;
     }
 
-    @Provides
-    @PerActivity
-    @Named("login")
-    UseCase provideLoginUseCase(AccountLogin accountLogin) {
-        return accountLogin;
-    }
+
 
 
 }
