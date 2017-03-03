@@ -19,21 +19,29 @@ import android.content.Context;
 
 import com.then.atry.UIThread;
 import com.then.atry.application.App;
+import com.then.atry.data.action.login.LoginSavePrefsConsumer;
 import com.then.atry.data.cache.UserCache;
 import com.then.atry.data.cache.UserCacheImpl;
 import com.then.atry.data.executor.JobExecutor;
 import com.then.atry.data.pref.RequestPrefs;
+import com.then.atry.data.repository.IconDataRepository;
 import com.then.atry.data.repository.LoginDataRepository;
+import com.then.atry.data.repository.OrgDataRepository;
+import com.then.atry.data.repository.SysDataRepository;
 import com.then.atry.data.repository.UserDataRepository;
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
+import com.then.atry.domain.repository.IconRepository;
 import com.then.atry.domain.repository.LoginRepository;
+import com.then.atry.domain.repository.OrgRepository;
+import com.then.atry.domain.repository.SysRepository;
 import com.then.atry.domain.repository.UserRepository;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.functions.Consumer;
 
 /**
  * Dagger module that provides objects which will live during the application lifecycle.
@@ -71,11 +79,6 @@ public class ApplicationModule {
         return RequestPrefs.create(application);
     }
 
-    @Provides
-    @Singleton
-    UserRepository provideUserRepository(UserDataRepository userDataRepository) {
-        return userDataRepository;
-    }
 
     @Provides
     @Singleton
@@ -85,11 +88,38 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
+    UserRepository provideUserRepository(UserDataRepository userDataRepository) {
+        return userDataRepository;
+    }
+
+    @Provides
+    @Singleton
+    SysRepository provideSysRepository(SysDataRepository sysDataRepository) {
+        return sysDataRepository;
+    }
+
+    @Provides
+    @Singleton
+    OrgRepository provideOrgRepository(OrgDataRepository orgDataRepository) {
+        return orgDataRepository;
+    }
+
+    @Provides
+    @Singleton
+    IconRepository provideIconRepository(IconDataRepository iconDataRepository) {
+        return iconDataRepository;
+    }
+
+    @Provides
+    @Singleton
     UserCache provideUserCache(UserCacheImpl userCache) {
         return userCache;
     }
 
-
-
+    @Provides
+    @Singleton
+    Consumer provideLoginSaveConsumer(LoginSavePrefsConsumer loginSavePrefsConsumer){
+        return loginSavePrefsConsumer;
+    }
 
 }

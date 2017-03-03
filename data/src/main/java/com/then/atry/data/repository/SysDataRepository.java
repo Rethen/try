@@ -1,10 +1,9 @@
 package com.then.atry.data.repository;
 
-import android.util.Log;
-
 import com.then.atry.data.net.HttpApiManager;
 import com.then.atry.domain.Sys;
-import com.then.atry.domain.interactor.ehome.cpf.sys.GetSysList;
+import com.then.atry.domain.interactor.atom.cpf.sys.GetSysInfo;
+import com.then.atry.domain.interactor.atom.cpf.sys.GetSysList;
 import com.then.atry.domain.repository.SysRepository;
 
 import java.util.List;
@@ -26,9 +25,9 @@ public class SysDataRepository implements SysRepository {
         this.httpApiManager = httpApiManager;
     }
 
+
     @Override
-    public Observable<Sys> sys(String sysId) {
-        Log.d("SysDataRepository", "httpApiManager:" + httpApiManager);
+    public Observable<Sys> sys(GetSysInfo.SysInfoParams params) {
         return null;
     }
 

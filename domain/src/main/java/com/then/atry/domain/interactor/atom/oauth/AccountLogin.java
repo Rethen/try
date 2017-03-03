@@ -1,4 +1,4 @@
-package com.then.atry.domain.interactor.ehome.oauth;
+package com.then.atry.domain.interactor.atom.oauth;
 
 import com.google.gson.reflect.TypeToken;
 import com.then.atry.domain.Oauth;
@@ -31,6 +31,7 @@ public class AccountLogin extends UseCase<Oauth, AccountLogin.LoginParams> {
     protected Observable<Oauth> buildUseCaseObservable(AccountLogin.LoginParams params) {
         return loginRepository.login(params);
     }
+
 
     public static final class LoginParams implements Params<Oauth> {
 

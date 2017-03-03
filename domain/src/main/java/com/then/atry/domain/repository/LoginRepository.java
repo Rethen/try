@@ -1,7 +1,7 @@
 package com.then.atry.domain.repository;
 
 import com.then.atry.domain.Oauth;
-import com.then.atry.domain.interactor.ehome.oauth.AccountLogin;
+import com.then.atry.domain.interactor.atom.oauth.AccountLogin;
 
 import io.reactivex.Observable;
 

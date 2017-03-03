@@ -1,9 +1,11 @@
-package com.then.atry.domain.interactor.ehome.cpf.org;
+package com.then.atry.domain.interactor.atom.cpf.org;
 
+import com.google.gson.reflect.TypeToken;
 import com.then.atry.domain.Org;
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
 import com.then.atry.domain.interactor.UseCase;
+import com.then.atry.domain.params.Params;
 import com.then.atry.domain.repository.OrgRepository;
 
 import javax.inject.Inject;
@@ -14,7 +16,7 @@ import io.reactivex.Observable;
  * Created by then on 2017/2/6.
  */
 
-public class GetOrgInfo extends UseCase<Org, GetOrgInfo.Params> {
+public class GetOrgInfo extends UseCase<Org, GetOrgInfo.GetOrgInfoParams> {
 
     private final OrgRepository repository;
 
@@ -25,12 +27,12 @@ public class GetOrgInfo extends UseCase<Org, GetOrgInfo.Params> {
     }
 
     @Override
-    protected Observable<Org> buildUseCaseObservable(Params params) {
-        return repository.org(params.getOrgId());
+    protected Observable<Org> buildUseCaseObservable(GetOrgInfoParams params) {
+        return repository.org(params);
     }
 
 
-    public static final class Params {
+    public static final class GetOrgInfoParams implements Params<Org> {
 
         private String orgId;
 
@@ -38,12 +40,25 @@ public class GetOrgInfo extends UseCase<Org, GetOrgInfo.Params> {
             return orgId;
         }
 
-        private Params(String orgId) {
+        public GetOrgInfoParams(String orgId) {
             this.orgId = orgId;
         }
 
-        public static Params forOrg(String orgId) {
-            return new Params(orgId);
+        @Override
+        public TypeToken<Org> takeTypeToken() {
+            return new TypeToken<Org>() {
+            };
+        }
+
+        @Override
+        public String takeSn() {
+            return "ehome.org.get";
+        }
+
+        @Override
+        public int takeService() {
+            return CPF;
         }
     }
+
 }

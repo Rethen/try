@@ -1,4 +1,4 @@
-package com.then.atry.domain.interactor.ehome.cpf.sys;
+package com.then.atry.domain.interactor.atom.cpf.sys;
 
 import com.google.gson.reflect.TypeToken;
 import com.then.atry.domain.Sys;
@@ -35,10 +35,6 @@ public class GetSysList extends UseCase<List<Sys>, GetSysList.SysListParams> {
 
 
     public static class SysListParams implements Params<List<Sys>> {
-
-        public static SysListParams create() {
-            return new SysListParams();
-        }
 
         @Override
         public TypeToken<List<Sys>> takeTypeToken() {

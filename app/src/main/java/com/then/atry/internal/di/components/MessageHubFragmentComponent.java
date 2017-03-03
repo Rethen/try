@@ -19,7 +19,9 @@ package com.then.atry.internal.di.components;
 import com.then.atry.fragment.messagehub.MessageHubFragment;
 import com.then.atry.internal.di.PerActivity;
 import com.then.atry.internal.di.modules.ActivityModule;
+import com.then.atry.internal.di.modules.IconModule;
 import com.then.atry.internal.di.modules.LoginModule;
+import com.then.atry.internal.di.modules.SysModule;
 import com.then.atry.internal.di.modules.UserModule;
 
 import dagger.Component;
@@ -28,10 +30,9 @@ import dagger.Component;
  * Injects user specific Fragments.
  */
 @PerActivity
-@Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, UserModule.class, LoginModule.class})
+@Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, UserModule.class, LoginModule.class, SysModule.class, IconModule.class})
 public interface MessageHubFragmentComponent extends ActivityComponent {
 
     void inject(MessageHubFragment fragment);
-
 
 }

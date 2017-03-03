@@ -38,6 +38,7 @@ public class CloudUserDataStoreTest {
   private CloudUserDataStore cloudUserDataStore;
 
   @Mock private RestApi mockRestApi;
+
   @Mock private UserCache mockUserCache;
 
   @Before
@@ -47,7 +48,7 @@ public class CloudUserDataStoreTest {
 
   @Test
   public void testGetUserEntityListFromApi() {
-    cloudUserDataStore.userEntityList();
+     cloudUserDataStore.userEntityList();
     verify(mockRestApi).userEntityList();
   }
 

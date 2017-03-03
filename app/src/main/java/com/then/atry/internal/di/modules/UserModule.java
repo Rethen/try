@@ -15,17 +15,12 @@
  */
 package com.then.atry.internal.di.modules;
 
-import com.then.atry.data.cache.UserCache;
-import com.then.atry.data.cache.UserCacheImpl;
-import com.then.atry.data.repository.UserDataRepository;
 import com.then.atry.domain.interactor.GetUserDetails;
 import com.then.atry.domain.interactor.GetUserList;
 import com.then.atry.domain.interactor.UseCase;
-import com.then.atry.domain.repository.UserRepository;
 import com.then.atry.internal.di.PerActivity;
 
 import javax.inject.Named;
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -34,12 +29,13 @@ import dagger.Provides;
  * Dagger module that provides user related collaborators.
  */
 @Module
-public class UserModule {
+public class UserModule  {
 
 
     public UserModule() {
 
     }
+
 
     @Provides
     @PerActivity
@@ -54,6 +50,7 @@ public class UserModule {
     UseCase provideGetUserDetailsUseCase(GetUserDetails getUserDetails) {
         return getUserDetails;
     }
+
 
 
 

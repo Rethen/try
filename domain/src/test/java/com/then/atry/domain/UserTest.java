@@ -13,16 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.android10.sample.domain;
+package com.then.atry.domain;
 
-
-import com.then.atry.domain.model.sample.User;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserTest {
 
@@ -37,8 +34,8 @@ public class UserTest {
 
   @Test
   public void testUserConstructorHappyCase() {
-    int userId = user.getUserId();
+    final int userId = user.getUserId();
 
-    assertThat(userId, is(FAKE_USER_ID));
+    assertThat(userId).isEqualTo(FAKE_USER_ID);
   }
 }

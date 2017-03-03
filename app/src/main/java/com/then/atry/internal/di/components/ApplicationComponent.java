@@ -18,9 +18,13 @@ package com.then.atry.internal.di.components;
 import android.app.Activity;
 import android.content.Context;
 
+import com.then.atry.data.pref.RequestPrefs;
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
+import com.then.atry.domain.repository.IconRepository;
 import com.then.atry.domain.repository.LoginRepository;
+import com.then.atry.domain.repository.OrgRepository;
+import com.then.atry.domain.repository.SysRepository;
 import com.then.atry.domain.repository.UserRepository;
 import com.then.atry.internal.di.modules.ApplicationModule;
 
@@ -47,4 +51,12 @@ public interface ApplicationComponent {
     UserRepository userRepository();
 
     LoginRepository loginRepository();
+
+    SysRepository sysRepository();
+
+    OrgRepository orgRepository();
+
+    IconRepository iconRepository();
+
+    RequestPrefs requestPrefs();
 }

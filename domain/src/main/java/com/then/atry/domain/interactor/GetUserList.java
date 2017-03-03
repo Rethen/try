@@ -45,4 +45,5 @@ public class GetUserList extends UseCase<List<User>, Void> {
     protected Observable<List<User>> buildUseCaseObservable(Void unused) {
         return this.userRepository.users();
     }
+
 }

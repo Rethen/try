@@ -1,5 +1,7 @@
 package com.then.atry.data.net;
 
+import android.util.Log;
+
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -131,8 +133,9 @@ public class HttpApiManager {
         RequestBody requestBody = httpHelper.createRequestBody(params);
         return getService(EhomeCommonRemoteRepository.class, params.takeService()).req(header, requestBody).flatMap(httpResult -> {
             T result = null;
+            Log.d("HttpApiManager.source:", "sn:"+params.takeSn()+"---------source:"+httpResult.getSource());
             if (httpResult.getError() != null) {
-
+                
             } else {
                 TypeToken typeToken=params.takeTypeToken();
                 TypeAdapter adapter = httpHelper.getGson().getAdapter(typeToken);

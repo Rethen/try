@@ -13,44 +13,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.android10.sample.domain.interactor;
+package com.then.atry.domain.interactor;
 
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
-import com.then.atry.domain.interactor.sample.GetUserList;
-import com.then.atry.domain.repository.sample.UserRepository;
+import com.then.atry.domain.repository.UserRepository;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
-public class GetUserListTest {
+@RunWith(MockitoJUnitRunner.class)
+public class GetUserDetailsTest {
 
-  private GetUserList getUserList;
+  private static final int USER_ID = 123;
 
+  private GetUserDetails getUserDetails;
+
+  @Mock private UserRepository mockUserRepository;
   @Mock private ThreadExecutor mockThreadExecutor;
   @Mock private PostExecutionThread mockPostExecutionThread;
-  @Mock private UserRepository mockUserRepository;
-  @Mock private RequestFilter requestFilter;
+
+  @Rule public ExpectedException expectedException = ExpectedException.none();
+
   @Before
   public void setUp() {
-    MockitoAnnotations.initMocks(this);
-    getUserList = new GetUserList(mockUserRepository, mockThreadExecutor,
-        mockPostExecutionThread,requestFilter);
+    getUserDetails = new GetUserDetails(mockUserRepository, mockThreadExecutor,
+            mockPostExecutionThread);
   }
 
   @Test
-  public void testGetUserListUseCaseObservableHappyCase() {
-    getUserList.buildUseCaseObservable();
+  public void testGetUserDetailsUseCaseObservableHappyCase() {
+    getUserDetails.buildUseCaseObservable(GetUserDetails.Params.forUser(USER_ID));
 
-    verify(mockUserRepository).users();
+    verify(mockUserRepository).user(USER_ID);
     verifyNoMoreInteractions(mockUserRepository);
-    verifyZeroInteractions(mockThreadExecutor);
     verifyZeroInteractions(mockPostExecutionThread);
+    verifyZeroInteractions(mockThreadExecutor);
+  }
+
+  @Test
+  public void testShouldFailWhenNoOrEmptyParameters() {
+    expectedException.expect(NullPointerException.class);
+    getUserDetails.buildUseCaseObservable(null);
   }
 }

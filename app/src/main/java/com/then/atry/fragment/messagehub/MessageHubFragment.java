@@ -13,12 +13,15 @@ import com.kymjs.themvp.ViewListenerManager;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
 import com.then.atry.BR;
 import com.then.atry.R;
+import com.then.atry.data.action.login.LoginSavePrefsConsumer;
 import com.then.atry.databinding.MessageHubFragmentBinding;
+import com.then.atry.domain.IconSort;
 import com.then.atry.domain.Oauth;
+import com.then.atry.domain.Sys;
 import com.then.atry.domain.User;
 import com.then.atry.domain.interactor.DefaultObserver;
 import com.then.atry.domain.interactor.UseCase;
-import com.then.atry.domain.interactor.ehome.oauth.AccountLogin;
+import com.then.atry.domain.interactor.atom.cpf.sys.GetSysList;
 import com.then.atry.fragment.BaseFragment;
 import com.then.atry.internal.di.components.DaggerMessageHubFragmentComponent;
 import com.then.atry.internal.di.components.MessageHubFragmentComponent;
@@ -51,13 +54,20 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
 //    UseCase sysUseCase;
 
 
-//    @Inject
-//    @Named("sysList")
-//    UseCase sysListUseCase;
+    @Inject
+    @Named("sysList")
+    UseCase sysListUseCase;
 
     @Inject
     @Named("login")
     UseCase loginUseCase;
+
+    @Inject
+    @Named("iconList")
+    UseCase iconListUseCase;
+
+    @Inject
+    LoginSavePrefsConsumer loginSaveConsumer;
 
     private ObservableList items;
 
@@ -105,6 +115,8 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
 
         final OauthObserver oauthObserver = new OauthObserver();
 
+        final GetSysListObserver getSysListObserver = new GetSysListObserver();
+
 
         new Thread(new Runnable() {
             @Override
@@ -114,7 +126,8 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                loginUseCase.execute(oauthObserver, AccountLogin.LoginParams.create("18650725014", "12345678"), bindUntilEvent(FragmentEvent.PAUSE));
+//                loginUseCase.execute(oauthObserver, AccountLogin.LoginParams.create("18650725014", "12345678"), bindUntilEvent(FragmentEvent.PAUSE));
+                sysListUseCase.execute(getSysListObserver, new GetSysList.SysListParams(), bindUntilEvent(FragmentEvent.PAUSE));
             }
         }).start();
 
@@ -159,10 +172,38 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
     }
 
 
+    private class GetIconListObserver extends DefaultObserver<List<IconSort>> {
+        @Override
+        public void onNext(List<IconSort> iconSorts) {
+            for (IconSort iconSort : iconSorts) {
+                Log.d("GetIconListObserver", "image:"+iconSort.getImage());
+            }
+        }
+
+        @Override
+        public void onError(Throwable exception) {
+           exception.printStackTrace();
+        }
+    }
+
+
     private class GetUserListSubscriber extends DefaultObserver<List<User>> {
         @Override
         public void onNext(List<User> users) {
             Log.d("GetUserListSubscriber", "users.size():" + users.size());
+        }
+    }
+
+    private class GetSysListObserver extends DefaultObserver<List<Sys>> {
+        @Override
+        public void onNext(List<Sys> syses) {
+            final GetIconListObserver getIconListObserver = new GetIconListObserver();
+            iconListUseCase.execute(getIconListObserver, syses.get(0).getSysId());
+        }
+
+        @Override
+        public void onError(Throwable exception) {
+            exception.printStackTrace();
         }
     }
 

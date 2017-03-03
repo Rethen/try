@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.antfortune.freeline'
 apply plugin: 'com.baoyz.treasure'
-
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
 
@@ -66,7 +66,6 @@ dependencies {
     compile rootProject.ext.dependencies["multidex"]
     compile rootProject.ext.dependencies["retrofit2"]
     compile rootProject.ext.dependencies["rx-android"]
-
 
     compile rootProject.ext.dependencies["dagger"]
     compile rootProject.ext.dependencies["fairyplugin"]

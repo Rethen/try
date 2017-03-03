@@ -13,47 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.fernandocejas.android10.sample.domain.interactor;
+package com.then.atry.domain.interactor;
 
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
-import com.then.atry.domain.interactor.sample.GetUserDetails;
-import com.then.atry.domain.repository.sample.UserRepository;
+import com.then.atry.domain.repository.UserRepository;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
-public class GetUserDetailsTest {
+@RunWith(MockitoJUnitRunner.class)
+public class GetUserListTest {
 
-  private static final int FAKE_USER_ID = 123;
+  private GetUserList getUserList;
 
-  private GetUserDetails getUserDetails;
-
-  @Mock private UserRepository mockUserRepository;
   @Mock private ThreadExecutor mockThreadExecutor;
   @Mock private PostExecutionThread mockPostExecutionThread;
+  @Mock private UserRepository mockUserRepository;
 
-  @Mock private RequestFilter requestFilter;
   @Before
   public void setUp() {
-    MockitoAnnotations.initMocks(this);
-    getUserDetails = new GetUserDetails(FAKE_USER_ID, mockUserRepository,
-        mockThreadExecutor, mockPostExecutionThread,requestFilter);
+    getUserList = new GetUserList(mockUserRepository, mockThreadExecutor,
+            mockPostExecutionThread);
   }
 
   @Test
-  public void testGetUserDetailsUseCaseObservableHappyCase() {
-    getUserDetails.buildUseCaseObservable();
-
-    verify(mockUserRepository).user(FAKE_USER_ID);
+  public void testGetUserListUseCaseObservableHappyCase() {
+     getUserList.buildUseCaseObservable(null);
+    verify(mockUserRepository).users();
     verifyNoMoreInteractions(mockUserRepository);
-    verifyZeroInteractions(mockPostExecutionThread);
     verifyZeroInteractions(mockThreadExecutor);
+    verifyZeroInteractions(mockPostExecutionThread);
   }
 }

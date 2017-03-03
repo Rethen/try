@@ -32,6 +32,7 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class JobExecutor implements ThreadExecutor {
+
   private final ThreadPoolExecutor threadPoolExecutor;
 
   @Inject
