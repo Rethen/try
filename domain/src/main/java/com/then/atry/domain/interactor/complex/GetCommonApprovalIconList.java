@@ -50,12 +50,10 @@ public class GetCommonApprovalIconList extends UseCase<List<IconSort>, String> {
     @Override
     protected Observable<List<IconSort>> buildUseCaseObservable(String sysId) {
 
-
         Observable<List<IconSort>> iconSortObs = sysRepository.sysList(new GetSysList.SysListParams())
                 .flatMap(syses -> Observable.just(syses.get(0)))
                 .flatMap(sys -> orgRepository.orgs(new GetOrgList.GetOrgListParams(sys.getSysId())))
-                .flatMap(orgs ->
-                {
+                .flatMap(orgs ->{
                     orgId = orgs.get(0).getOrgId();
                     return iconRepository.getIcons(new GetIconSortList.GetIconSortListParams(orgs.get(0).getOrgId(), "1"));
                 });
@@ -65,7 +63,6 @@ public class GetCommonApprovalIconList extends UseCase<List<IconSort>, String> {
                 .buffer(10);
 
         Observable<List<IconSort>> lastObs = Observable.zip(iconSortObs, iconObs, new BiFunction<List<IconSort>, List<Icon>, List<IconSort>>() {
-
             @Override
             public List<IconSort> apply(List<IconSort> iconSorts, List<Icon> icons) throws Exception {
                 for (int i = 0; i < iconSorts.size(); i++) {
