@@ -17,4 +17,5 @@ public interface OrgRepository {
     Observable<Org> org(GetOrgInfo.GetOrgInfoParams params);
 
     Observable<List<Org>> orgs(GetOrgList.GetOrgListParams params);
+
 }

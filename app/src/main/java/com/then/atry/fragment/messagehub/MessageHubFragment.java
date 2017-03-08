@@ -186,7 +186,6 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
         }
     }
 
-
     private class GetUserListSubscriber extends DefaultObserver<List<User>> {
         @Override
         public void onNext(List<User> users) {

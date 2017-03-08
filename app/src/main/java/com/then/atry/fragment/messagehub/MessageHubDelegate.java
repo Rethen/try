@@ -20,6 +20,9 @@ public class MessageHubDelegate extends AppDelegate<MessageHubFragmentBinding> {
         super.initWidget();
 //       viewDataBinding.list.setVisibility(View.GONE);
     }
+    public  void kk(){
+
+    }
 
 
 }

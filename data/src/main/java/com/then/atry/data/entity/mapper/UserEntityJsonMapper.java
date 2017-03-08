@@ -61,4 +61,5 @@ public class UserEntityJsonMapper {
     final Type listOfUserEntityType = new TypeToken<List<UserEntity>>() {}.getType();
     return this.gson.fromJson(userListJsonResponse, listOfUserEntityType);
   }
+
 }

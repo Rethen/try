@@ -13,5 +13,4 @@ public interface LoginRepository {
 
     Observable<Oauth> login(AccountLogin.LoginParams params);
 
-
 }

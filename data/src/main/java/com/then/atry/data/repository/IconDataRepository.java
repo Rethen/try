@@ -21,11 +21,11 @@ public class IconDataRepository implements IconRepository {
 
     private final HttpApiManager httpApiManager;
 
+
     @Inject
     IconDataRepository(HttpApiManager httpApiManager) {
         this.httpApiManager = httpApiManager;
     }
-
 
     @Override
     public Observable<List<IconSort>> getIcons(GetIconSortList.GetIconSortListParams params) {

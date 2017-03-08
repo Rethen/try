@@ -22,4 +22,6 @@ import java.util.concurrent.Executor;
  * execution, but every implementation will execute the
  * {@link com.then.atry.domain.interactor.UseCase} out of the UI thread.
  */
-public interface ThreadExecutor extends Executor {}
+public interface ThreadExecutor extends Executor {
+
+}

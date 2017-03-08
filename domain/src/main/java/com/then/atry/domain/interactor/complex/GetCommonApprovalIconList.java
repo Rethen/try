@@ -18,7 +18,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.BiFunction;
 
 /**
  * @类名: GetCommonApprovalIconList
@@ -30,6 +29,7 @@ public class GetCommonApprovalIconList extends UseCase<List<IconSort>, String> {
 
 
     private final SysRepository sysRepository;
+
 
     private final OrgRepository orgRepository;
 
@@ -50,30 +50,24 @@ public class GetCommonApprovalIconList extends UseCase<List<IconSort>, String> {
     @Override
     protected Observable<List<IconSort>> buildUseCaseObservable(String sysId) {
 
-        Observable<List<IconSort>> iconSortObs = sysRepository.sysList(new GetSysList.SysListParams())
+        return sysRepository.sysList(new GetSysList.SysListParams())
                 .flatMap(syses -> Observable.just(syses.get(0)))
                 .flatMap(sys -> orgRepository.orgs(new GetOrgList.GetOrgListParams(sys.getSysId())))
-                .flatMap(orgs ->{
+                .flatMap(orgs -> {
                     orgId = orgs.get(0).getOrgId();
                     return iconRepository.getIcons(new GetIconSortList.GetIconSortListParams(orgs.get(0).getOrgId(), "1"));
-                });
-
-        Observable<List<Icon>> iconObs = iconSortObs.flatMapIterable(iconSorts -> iconSorts)
-                .flatMap(iconSort -> iconRepository.getIconInfo(new GetIconInfo.GetIconInfoParams(orgId, iconSort.getIconId())))
+                })
+                .flatMapIterable(iconSorts -> iconSorts)
+                .flatMap(iconSort -> {
+                    Observable<Icon> iconObs = iconRepository.getIconInfo(new GetIconInfo.GetIconInfoParams(orgId, iconSort.getIconId()));
+                    return Observable.zip(Observable.just(iconSort), iconObs, (iconSort1, icon) -> {
+                        iconSort1.setImage(icon.getImage());
+                        return iconSort1;
+                    });
+                })
                 .buffer(10);
 
-        Observable<List<IconSort>> lastObs = Observable.zip(iconSortObs, iconObs, new BiFunction<List<IconSort>, List<Icon>, List<IconSort>>() {
-            @Override
-            public List<IconSort> apply(List<IconSort> iconSorts, List<Icon> icons) throws Exception {
-                for (int i = 0; i < iconSorts.size(); i++) {
-                    IconSort iconSort = iconSorts.get(i);
-                    Icon icon = icons.get(i);
-                    iconSort.setImage(icon.getImage());
-                }
-                return iconSorts;
-            }
-        });
-        return lastObs;
+
     }
 
 

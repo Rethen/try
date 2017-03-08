@@ -17,8 +17,6 @@ import com.then.atry.databinding.ActivityMainBinding;
 public class MainDelegate extends AppDelegate<ActivityMainBinding> {
 
 
-
-
     @Override
     public int getRootLayoutId() {
         return R.layout.activity_main;
@@ -27,6 +25,9 @@ public class MainDelegate extends AppDelegate<ActivityMainBinding> {
     @Override
     public void initWidget() {
         super.initWidget();
+
+
+
 
         Toolbar toolbar = get(R.id.toolbar);
         getActivity().setSupportActionBar(toolbar);
@@ -46,7 +47,9 @@ public class MainDelegate extends AppDelegate<ActivityMainBinding> {
 
     }
 
+   public  void  dd(){
 
+   }
 
 
 

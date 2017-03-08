@@ -36,8 +36,6 @@ public class MainActivity extends BaseActivity<MainDelegate, ActivityMainBinding
     private FragmentTransaction ft;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +47,7 @@ public class MainActivity extends BaseActivity<MainDelegate, ActivityMainBinding
     protected void bindEvenListener() {
         super.bindEvenListener();
         //可以同时对多个控件设置同一个点击事件,后面id参数可以传多个
-//        viewDelegate.setOnClickListener(this,R.id.imageView);
+        viewDelegate.setOnClickListener(this,R.id.imageView);
     }
 
 
@@ -73,6 +71,7 @@ public class MainActivity extends BaseActivity<MainDelegate, ActivityMainBinding
     public void actionViewModel(View view, BaseViewModel baseViewModel, int actionType) {
 
     }
+
 
     @Override
     protected Class getDelegateClass() {

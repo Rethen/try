@@ -35,6 +35,7 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
 public abstract class ActivityPresenter<T extends IDelegate,D extends ViewDataBinding> extends RxAppCompatActivity implements BaseViewModel.ViewModelListener,View.OnClickListener,View.OnLongClickListener {
+
     protected T viewDelegate;
 
     public ActivityPresenter() {
