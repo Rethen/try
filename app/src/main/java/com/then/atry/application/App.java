@@ -4,11 +4,11 @@ import android.support.multidex.MultiDexApplication;
 
 import com.kymjs.themvp.ViewListenerManager;
 import com.then.atry.activity.main.MainActivity;
-import com.then.atry.viewmodel.MessageHubViewModel;
 import com.then.atry.fragment.messagehub.MessageHubFragment;
 import com.then.atry.internal.di.components.ApplicationComponent;
 import com.then.atry.internal.di.components.DaggerApplicationComponent;
 import com.then.atry.internal.di.modules.ApplicationModule;
+import com.then.atry.viewmodel.MessageHubViewModel;
 
 import io.realm.Realm;
 

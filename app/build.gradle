@@ -39,6 +39,7 @@ android {
                             'src/main/res/layouts/mainframe',
                             'src/main/res/layouts/contacts',
                             'src/main/res/layouts/chat',
+                            'src/main/res/layouts/login',
                             'src/main/res/layouts',
                             'src/main/res'
                     ]
@@ -77,4 +78,5 @@ dependencies {
 
     compile project(path: ':data')
 
+    compile rootProject.ext.dependencies["constraint-layout"]
 }

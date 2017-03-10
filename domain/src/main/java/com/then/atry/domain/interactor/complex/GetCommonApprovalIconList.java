@@ -30,9 +30,7 @@ public class GetCommonApprovalIconList extends UseCase<List<IconSort>, String> {
 
     private final SysRepository sysRepository;
 
-
     private final OrgRepository orgRepository;
-
 
     private final IconRepository iconRepository;
 

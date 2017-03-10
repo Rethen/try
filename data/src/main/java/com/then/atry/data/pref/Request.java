@@ -5,7 +5,11 @@ import net.yslibrary.simplepreferences.annotation.Key;
 import net.yslibrary.simplepreferences.annotation.Preferences;
 
 /**
- * Created by then on 2017/2/7.
+ *
+ * @类名: Request
+ * @描述:  请求的配置文件
+ * @作者 then
+ * @创建日期 2017/3/8 8:26
  */
 @Preferences
 public class Request {
