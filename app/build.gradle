@@ -64,8 +64,10 @@ dependencies {
     compile rootProject.ext.dependencies["design"]
     compile rootProject.ext.dependencies["cardview-v7"]
     compile rootProject.ext.dependencies["material-values"]
+    compile rootProject.ext.dependencies["flexlayout"]
     compile rootProject.ext.dependencies["permissions"]
     compile rootProject.ext.dependencies["xlog"]
+    compile rootProject.ext.dependencies["lottie"]
     compile rootProject.ext.dependencies["multidex"]
     compile rootProject.ext.dependencies["retrofit2"]
     compile rootProject.ext.dependencies["rx-android"]
@@ -73,6 +75,7 @@ dependencies {
     compile rootProject.ext.dependencies["dagger"]
     compile rootProject.ext.dependencies["fairyplugin"]
     provided rootProject.ext.dependencies["dagger-compiler"]
+
 
 
     testCompile 'junit:junit:4.12'

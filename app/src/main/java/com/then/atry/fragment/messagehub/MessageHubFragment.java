@@ -22,6 +22,7 @@ import com.then.atry.domain.User;
 import com.then.atry.domain.interactor.DefaultObserver;
 import com.then.atry.domain.interactor.UseCase;
 import com.then.atry.domain.interactor.atom.cpf.sys.GetSysList;
+import com.then.atry.domain.interactor.atom.oauth.AccountLogin;
 import com.then.atry.fragment.BaseFragment;
 import com.then.atry.internal.di.components.DaggerMessageHubFragmentComponent;
 import com.then.atry.internal.di.components.MessageHubFragmentComponent;
@@ -126,7 +127,7 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-//                loginUseCase.execute(oauthObserver, AccountLogin.LoginParams.create("18650725014", "12345678"), bindUntilEvent(FragmentEvent.PAUSE));
+                loginUseCase.execute(oauthObserver, AccountLogin.LoginParams.create("18650725014", "12345678"), bindUntilEvent(FragmentEvent.PAUSE));
                 sysListUseCase.execute(getSysListObserver, new GetSysList.SysListParams(), bindUntilEvent(FragmentEvent.PAUSE));
             }
         }).start();

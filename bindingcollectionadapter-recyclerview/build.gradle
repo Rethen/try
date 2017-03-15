@@ -34,6 +34,9 @@ android {
 dependencies {
     compile project(':bindingcollectionadapter')
     compile rootProject.ext.dependencies["recyclerview-v7"]
+    compile (rootProject.ext.dependencies["vlayout"]) {
+        transitive = true
+    }
     androidTestCompile 'com.android.support.test:runner:0.4'
     androidTestCompile 'com.android.support.test:rules:0.4'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'

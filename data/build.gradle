@@ -74,6 +74,8 @@ dependencies {
 
     compile rootProject.ext.dependencies["simplepreferences"]
 
+    compile rootProject.ext.dependencies["utilcode"]
+
     apt rootProject.ext.dependencies["simplepreferences-processor"]
 
 

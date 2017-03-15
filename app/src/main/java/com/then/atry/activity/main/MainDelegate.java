@@ -46,6 +46,9 @@ public class MainDelegate extends AppDelegate<ActivityMainBinding> {
     }
 
 
+    public  void  kk(){
+
+    }
 
 
 }

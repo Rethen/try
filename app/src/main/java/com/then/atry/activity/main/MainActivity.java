@@ -1,5 +1,6 @@
 package com.then.atry.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,6 +16,7 @@ import com.kymjs.themvp.ViewListenerManager;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
 import com.then.atry.R;
 import com.then.atry.activity.BaseActivity;
+import com.then.atry.activity.login.LoginActivity;
 import com.then.atry.databinding.ActivityMainBinding;
 import com.then.atry.fragment.messagehub.MessageHubFragment;
 
@@ -48,7 +50,10 @@ public class MainActivity extends BaseActivity<MainDelegate, ActivityMainBinding
         super.bindEvenListener();
         //可以同时对多个控件设置同一个点击事件,后面id参数可以传多个
         viewDelegate.setOnClickListener(this);
+
     }
+
+
 
 
     @Override
@@ -69,7 +74,7 @@ public class MainActivity extends BaseActivity<MainDelegate, ActivityMainBinding
 
     @Override
     public void actionViewModel(View view, BaseViewModel baseViewModel, int actionType) {
-
+     LoginActivity.start(getApplicationContext(),"kdsjgkds");
     }
 
 
