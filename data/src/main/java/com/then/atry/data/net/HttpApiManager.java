@@ -53,9 +53,11 @@ public class HttpApiManager {
     //正式
     public static final String OAUTH_URL = "oauth.7mhome.com";
     public static final String CPF_URL = "cpf.7mhome.com";
+    public static final String WFLOW_URL = "wflow.7mhome.com";
     public static final String FILE_SERVICE_URL = "192.168.254.188";
     public static final int CPF_PORT = 9000;
     public static final int OAUTH_PORT = 9200;
+    public static final int WFLOW_PORT = 9100;
     public static final int FILE_SERVICE_PORT = 8003;
     public final static String CHAT_URL = "http://im.7mhome.com:5000";//即时通信IP端口
     public final static String CHAT_RECEIVE_ROUTER_SERVER_URL = "http://im.7mhome.com:6666";//聊天路由服务
@@ -65,6 +67,7 @@ public class HttpApiManager {
 
     private HttpUrl cpfHttpUrl;
 
+    private HttpUrl wfHttpUrl;
 
     private HttpUrl fileHttpUrl;
 
@@ -81,6 +84,8 @@ public class HttpApiManager {
         oauthHttpUrl = new HttpUrl.Builder().scheme(SCHEME).host(OAUTH_URL).port(OAUTH_PORT).build();
 
         cpfHttpUrl = new HttpUrl.Builder().scheme(SCHEME).host(CPF_URL).port(CPF_PORT).build();
+
+        wfHttpUrl = new HttpUrl.Builder().scheme(SCHEME).host(WFLOW_URL).port(WFLOW_PORT).build();
 
         fileHttpUrl = new HttpUrl.Builder().scheme(SCHEME).host(FILE_SERVICE_URL).port(FILE_SERVICE_PORT).build();
 
@@ -113,11 +118,19 @@ public class HttpApiManager {
         return retrofit.create(clazz);
     }
 
+    public <T> T getWFService(Class<T> clazz) {
+        Retrofit retrofit = createNewRetrofit(wfHttpUrl, okHttpClient);
+        return retrofit.create(clazz);
+    }
+
+
     public <T> T getService(Class<T> clazz, int serviceType) {
         if (serviceType == Params.OAUTH) {
             return getOauthService(clazz);
         } else if (serviceType == Params.CPF) {
             return getCPFService(clazz);
+        } else if (serviceType == Params.WF) {
+            return getWFService(clazz);
         }
         return null;
     }
@@ -133,11 +146,11 @@ public class HttpApiManager {
         RequestBody requestBody = httpHelper.createRequestBody(params);
         return getService(EhomeCommonRemoteRepository.class, params.takeService()).req(header, requestBody).flatMap(httpResult -> {
             T result = null;
-            Log.d("HttpApiManager.source:", "sn:"+params.takeSn()+"---------source:"+httpResult.getSource());
+            Log.d("HttpApiManager.source:", "sn:" + params.takeSn() + "---------source:" + httpResult.getSource());
             if (httpResult.getError() != null) {
-                
+
             } else {
-                TypeToken typeToken=params.takeTypeToken();
+                TypeToken typeToken = params.takeTypeToken();
                 TypeAdapter adapter = httpHelper.getGson().getAdapter(typeToken);
                 JsonReader jsonReader = httpHelper.getGson().newJsonReader(new StringReader(httpResult.getSource()));
                 try {

@@ -12,6 +12,8 @@ public interface Params<T> {
 
     int CPF=1;
 
+    int WF=2;
+
     TypeToken<T> takeTypeToken();
 
     String takeSn();

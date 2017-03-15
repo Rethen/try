@@ -18,11 +18,9 @@ public class MessageHubDelegate extends AppDelegate<MessageHubFragmentBinding> {
     @Override
     public void initWidget() {
         super.initWidget();
-//       viewDataBinding.list.setVisibility(View.GONE);
     }
-    public  void kk(){
 
-    }
+
 
 
 }

@@ -35,10 +35,9 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
  * @param <T> View delegate class type
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
-public abstract class FragmentPresenter<T extends IDelegate,D extends ViewDataBinding> extends RxFragment implements BaseViewModel.ViewModelListener, View.OnClickListener,View.OnLongClickListener
-{
-    public T viewDelegate;
+public abstract class FragmentPresenter<T extends IDelegate, D extends ViewDataBinding> extends RxFragment implements BaseViewModel.ViewModelListener, View.OnClickListener, View.OnLongClickListener {
 
+    public T viewDelegate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public abstract class FragmentPresenter<T extends IDelegate,D extends ViewDataBi
         return viewDelegate.getRootView();
     }
 
-    protected  D createBinding(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected D createBinding(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return (D) viewDelegate.create(inflater, container, savedInstanceState);
     }
 
@@ -99,12 +98,12 @@ public abstract class FragmentPresenter<T extends IDelegate,D extends ViewDataBi
 
     @Override
     public void onClick(View v) {
-        actionViewModel(v,null, BaseViewModel.ItemAction.ONCLICK);
+        actionViewModel(v, null, BaseViewModel.ItemAction.ONCLICK);
     }
 
     @Override
     public boolean onLongClick(View v) {
-        actionViewModel(v,null, BaseViewModel.ItemAction.LONG_CLICK);
+        actionViewModel(v, null, BaseViewModel.ItemAction.LONG_CLICK);
         return true;
     }
 

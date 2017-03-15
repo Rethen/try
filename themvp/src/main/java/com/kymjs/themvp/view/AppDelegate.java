@@ -33,7 +33,7 @@ import android.widget.Toast;
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
 public abstract class AppDelegate<D  extends ViewDataBinding> implements IDelegate<D> {
-    protected final SparseArray<View> mViews = new SparseArray<View>();
+    protected final SparseArray<View> mViews = new SparseArray();
 
     protected View rootView;
 
@@ -99,6 +99,8 @@ public abstract class AppDelegate<D  extends ViewDataBinding> implements IDelega
     public void toast(CharSequence msg) {
         Toast.makeText(rootView.getContext(), msg, Toast.LENGTH_SHORT).show();
     }
+
+
 
     public <T extends AppCompatActivity> T getActivity() {
         return (T) rootView.getContext();

@@ -27,8 +27,6 @@ public class MainDelegate extends AppDelegate<ActivityMainBinding> {
         super.initWidget();
 
 
-
-
         Toolbar toolbar = get(R.id.toolbar);
         getActivity().setSupportActionBar(toolbar);
 
@@ -46,11 +44,6 @@ public class MainDelegate extends AppDelegate<ActivityMainBinding> {
         bottomNavigationView.setOnNavigationItemSelectedListener((BottomNavigationView.OnNavigationItemSelectedListener) getActivity());
 
     }
-
-   public  void  dd(){
-
-   }
-
 
 
 

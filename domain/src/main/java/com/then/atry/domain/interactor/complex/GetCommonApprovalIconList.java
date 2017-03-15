@@ -30,9 +30,7 @@ public class GetCommonApprovalIconList extends UseCase<List<IconSort>, String> {
 
     private final SysRepository sysRepository;
 
-
     private final OrgRepository orgRepository;
-
 
     private final IconRepository iconRepository;
 
@@ -60,6 +58,7 @@ public class GetCommonApprovalIconList extends UseCase<List<IconSort>, String> {
                 .flatMapIterable(iconSorts -> iconSorts)
                 .flatMap(iconSort -> {
                     Observable<Icon> iconObs = iconRepository.getIconInfo(new GetIconInfo.GetIconInfoParams(orgId, iconSort.getIconId()));
+
                     return Observable.zip(Observable.just(iconSort), iconObs, (iconSort1, icon) -> {
                         iconSort1.setImage(icon.getImage());
                         return iconSort1;

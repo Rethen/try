@@ -6,7 +6,6 @@ package com.then.atry.data.exception;
 public class EhomeException extends  Exception {
 
 
-
     private String code;
 
     private  String message;
