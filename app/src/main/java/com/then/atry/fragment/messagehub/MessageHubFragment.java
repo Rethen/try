@@ -21,16 +21,12 @@ import com.then.atry.fragment.BaseFragment;
 import com.then.atry.internal.di.components.DaggerMessageHubFragmentComponent;
 import com.then.atry.internal.di.components.MessageHubFragmentComponent;
 import com.then.atry.internal.di.modules.ActivityModule;
-import com.then.atry.viewmodel.ListViewModel;
-import com.then.atry.viewmodel.MessageHubViewModel;
+import com.then.atry.data.viewmodel.ListViewModel;
+import com.then.atry.data.viewmodel.MessageHubViewModel;
 import com.trello.rxlifecycle2.android.FragmentEvent;
-
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import io.reactivex.observers.DisposableObserver;
 
 
 /**

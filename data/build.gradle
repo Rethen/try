@@ -52,7 +52,7 @@ dependencies {
 
     compile project(':domain')
 
-    compile project(path: ':themvp')
+    compile project(':themvp')
 
     compile rootProject.ext.dependencies["javax-annotation"]
 

@@ -1,12 +1,12 @@
-package com.then.atry.viewmodel;
+package com.then.atry.data.viewmodel;
 
 
 import android.databinding.Bindable;
 import android.databinding.Observable;
 import android.databinding.ObservableList;
 
-import com.then.atry.BR;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
+import com.then.atry.data.BR;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 import me.tatarka.bindingcollectionadapter2.OnItemBind;

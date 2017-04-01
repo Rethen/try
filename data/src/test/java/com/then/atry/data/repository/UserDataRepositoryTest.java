@@ -17,7 +17,6 @@ package com.then.atry.data.repository;
 
 import com.then.atry.data.entity.UserEntity;
 import com.then.atry.data.entity.mapper.UserEntityDataMapper;
-import com.then.atry.data.repository.datasource.UserDataStore;
 
 import org.junit.Before;
 import org.junit.Test;

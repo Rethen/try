@@ -8,7 +8,7 @@ import com.then.atry.fragment.messagehub.MessageHubFragment;
 import com.then.atry.internal.di.components.ApplicationComponent;
 import com.then.atry.internal.di.components.DaggerApplicationComponent;
 import com.then.atry.internal.di.modules.ApplicationModule;
-import com.then.atry.viewmodel.MessageHubViewModel;
+import com.then.atry.data.viewmodel.MessageHubViewModel;
 
 import io.realm.Realm;
 

@@ -1,8 +1,8 @@
-package com.then.atry.viewmodel;
+package com.then.atry.data.viewmodel;
 
 import android.databinding.Bindable;
-import com.then.atry.BR;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
+import com.then.atry.data.BR;
 
 /**
  * Created by then on 2017/2/6.
