@@ -16,7 +16,6 @@
 package com.then.atry.data.entity.mapper;
 
 import com.then.atry.data.entity.UserEntity;
-import com.then.atry.domain.User;
 
 import org.junit.Before;
 import org.junit.Test;

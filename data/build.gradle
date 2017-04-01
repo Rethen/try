@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.fernandocejas.frodo'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'realm-android'
@@ -44,6 +43,7 @@ android {
     dataBinding {
         enabled = true
     }
+    buildToolsVersion '25.0.2'
 }
 
 dependencies {
@@ -54,11 +54,11 @@ dependencies {
 
     compile project(path: ':themvp')
 
-    compile project(path: ':bindingcollectionadapter')
-
-    compile project(path: ':bindingcollectionadapter-recyclerview')
-
     compile rootProject.ext.dependencies["javax-annotation"]
+
+    compile rootProject.ext.dependencies["bindingcollectionadapter"]
+
+    compile rootProject.ext.dependencies["bindingcollectionadapter-recyclerview"]
 
     compile rootProject.ext.dependencies["okhttp3"]
 
@@ -76,8 +76,7 @@ dependencies {
 
     compile rootProject.ext.dependencies["utilcode"]
 
-    apt rootProject.ext.dependencies["simplepreferences-processor"]
-
+    annotationProcessor  rootProject.ext.dependencies["simplepreferences-processor"]
 
     testCompile rootProject.ext.testDependencies["junit"]
 

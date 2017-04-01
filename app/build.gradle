@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.antfortune.freeline'
 apply plugin: 'com.baoyz.treasure'
 apply plugin: 'me.tatarka.retrolambda'
@@ -63,6 +62,7 @@ dependencies {
     compile rootProject.ext.dependencies["support-v4"]
     compile rootProject.ext.dependencies["design"]
     compile rootProject.ext.dependencies["cardview-v7"]
+    compile rootProject.ext.dependencies["constraint-layout"]
     compile rootProject.ext.dependencies["material-values"]
     compile rootProject.ext.dependencies["flexlayout"]
     compile rootProject.ext.dependencies["permissions"]
@@ -82,5 +82,5 @@ dependencies {
 
     compile project(path: ':data')
 
-    compile rootProject.ext.dependencies["constraint-layout"]
+
 }

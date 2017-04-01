@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity<MainDelegate, ActivityMainBinding
 
     @Override
     public void actionViewModel(View view, BaseViewModel baseViewModel, int actionType) {
-     LoginActivity.start(getApplicationContext(),"kdsjgkds");
+
     }
 
 

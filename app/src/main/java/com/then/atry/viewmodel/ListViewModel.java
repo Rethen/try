@@ -8,9 +8,9 @@ import android.databinding.ObservableList;
 import com.then.atry.BR;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
 
-import me.tatarka.bindingcollectionadapter.ItemView;
-import me.tatarka.bindingcollectionadapter.ItemViewArg;
-import me.tatarka.bindingcollectionadapter.ItemViewSelector;
+import me.tatarka.bindingcollectionadapter2.ItemBinding;
+import me.tatarka.bindingcollectionadapter2.OnItemBind;
+
 
 /**
  * Created by evan on 5/31/15.
@@ -28,7 +28,7 @@ public class ListViewModel extends BaseViewModel  {
      * 列表子项布局
      */
     @Bindable
-    private ItemViewArg itemView;
+    private ItemBinding itemBinding;
 
 
     @Bindable
@@ -37,12 +37,12 @@ public class ListViewModel extends BaseViewModel  {
 
 
     public ListViewModel(ObservableList<? extends Observable> items, int layoutId,int BRId) {
-        itemView = ItemViewArg.of(ItemView.of(BRId, layoutId));
+        itemBinding = ItemBinding.of(BRId, layoutId);
         this.items = items;
     }
 
-    public ListViewModel(ObservableList<? extends Observable> items, ItemViewSelector selector) {
-        itemView = ItemViewArg.of(selector);
+    public ListViewModel(ObservableList<? extends Observable> items, OnItemBind onItemBind) {
+        itemBinding = ItemBinding.of(onItemBind);
         this.items = items;
     }
 
@@ -55,9 +55,7 @@ public class ListViewModel extends BaseViewModel  {
         return items;
     }
 
-    public ItemViewArg getItemView() {
-        return itemView;
-    }
+
 
 
     public int getGridSpanCount() {
@@ -70,4 +68,12 @@ public class ListViewModel extends BaseViewModel  {
     }
 
 
+    public ItemBinding getItemBinding() {
+        return itemBinding;
+    }
+
+    public void setItemBinding(ItemBinding itemBinding) {
+        this.itemBinding = itemBinding;
+        notifyPropertyChanged(BR.itemBinding);
+    }
 }

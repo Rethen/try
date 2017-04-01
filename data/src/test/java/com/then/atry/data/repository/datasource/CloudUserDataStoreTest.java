@@ -17,7 +17,6 @@ package com.then.atry.data.repository.datasource;
 
 import com.then.atry.data.cache.UserCache;
 import com.then.atry.data.entity.UserEntity;
-import com.then.atry.data.net.RestApi;
 
 import org.junit.Before;
 import org.junit.Test;

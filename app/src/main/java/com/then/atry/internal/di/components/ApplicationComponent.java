@@ -21,11 +21,7 @@ import android.content.Context;
 import com.then.atry.data.pref.RequestPrefs;
 import com.then.atry.domain.executor.PostExecutionThread;
 import com.then.atry.domain.executor.ThreadExecutor;
-import com.then.atry.domain.repository.IconRepository;
-import com.then.atry.domain.repository.LoginRepository;
-import com.then.atry.domain.repository.OrgRepository;
-import com.then.atry.domain.repository.SysRepository;
-import com.then.atry.domain.repository.UserRepository;
+import com.then.atry.domain.repository.GraphqlRespository;
 import com.then.atry.internal.di.modules.ApplicationModule;
 
 import javax.inject.Singleton;
@@ -48,15 +44,7 @@ public interface ApplicationComponent {
 
     PostExecutionThread postExecutionThread();
 
-    UserRepository userRepository();
-
-    LoginRepository loginRepository();
-
-    SysRepository sysRepository();
-
-    OrgRepository orgRepository();
-
-    IconRepository iconRepository();
+    GraphqlRespository graphqlRespository();
 
     RequestPrefs requestPrefs();
 }

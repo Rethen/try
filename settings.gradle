@@ -1,1 +1,1 @@
-include ':app', ':bindingcollectionadapter', ':bindingcollectionadapter-recyclerview', ':themvp', ':domain', ':data'
+include ':app',  ':themvp', ':domain', ':data'

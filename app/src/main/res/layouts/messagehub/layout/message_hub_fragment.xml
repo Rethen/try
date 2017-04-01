@@ -8,7 +8,7 @@
             name="listViewModel"
             type="com.then.atry.viewmodel.ListViewModel" />
 
-        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
 
     </data>
 
@@ -21,7 +21,7 @@
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:itemView="@{listViewModel.itemView}"
+            app:itemBinding="@{listViewModel.itemBinding}"
             app:items="@{listViewModel.items}"
             app:layoutManager="@{LayoutManagers.linear()}" />
 
