@@ -12,7 +12,7 @@ import com.then.atry.internal.di.components.ApplicationComponent;
  * Created by then on 2016/12/16.
  */
 
-public abstract class BaseActivity<T extends IDelegate, D extends ViewDataBinding> extends DataBindActivity<T, D> {
+public abstract class BaseActivity<T extends IDelegate> extends DataBindActivity<T> {
 
 
     @Override

@@ -26,21 +26,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.kymjs.themvp.viewmodel.BaseViewModel;
+
 /**
  * View delegate base class
  * 视图层代理的基类
  *
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
-public abstract class AppDelegate<D  extends ViewDataBinding> implements IDelegate<D> {
+public abstract class AppDelegate<VM extends BaseViewModel, D extends ViewDataBinding> implements IDelegate {
     protected final SparseArray<View> mViews = new SparseArray();
 
     protected View rootView;
 
     protected D viewDataBinding;
 
+    protected VM viewModel;
+
     @Override
-    public  D create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public D create(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         int rootLayoutId = getRootLayoutId();
         D binding = DataBindingUtil.inflate(inflater, rootLayoutId, container, false);
         if (binding == null) {
@@ -48,9 +52,12 @@ public abstract class AppDelegate<D  extends ViewDataBinding> implements IDelega
         } else {
             rootView = binding.getRoot();
         }
-        viewDataBinding=  binding;
+        viewDataBinding = binding;
+        bindViewModel();
         return binding;
     }
+
+    protected abstract void bindViewModel();
 
     @Override
     public int getOptionsMenuId() {
@@ -100,6 +107,9 @@ public abstract class AppDelegate<D  extends ViewDataBinding> implements IDelega
         Toast.makeText(rootView.getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
+    public String getStrRes(int resId) {
+        return rootView.getContext().getResources().getString(resId);
+    }
 
 
     public <T extends AppCompatActivity> T getActivity() {

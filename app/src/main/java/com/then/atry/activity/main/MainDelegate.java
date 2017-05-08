@@ -14,12 +14,18 @@ import com.then.atry.databinding.ActivityMainBinding;
  * Created by then on 2016/12/6.
  */
 
-public class MainDelegate extends AppDelegate<ActivityMainBinding> {
+public class MainDelegate extends AppDelegate<MainViewModel,ActivityMainBinding> {
 
 
     @Override
     public int getRootLayoutId() {
         return R.layout.activity_main;
+    }
+
+
+    @Override
+    protected void bindViewModel() {
+
     }
 
     @Override

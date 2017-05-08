@@ -22,6 +22,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.kymjs.themvp.view.IDelegate;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
@@ -34,13 +36,15 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
  * @param <T> View delegate class type
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
-public abstract class ActivityPresenter<T extends IDelegate,D extends ViewDataBinding> extends RxAppCompatActivity implements BaseViewModel.ViewModelListener,View.OnClickListener,View.OnLongClickListener {
+public abstract class ActivityPresenter<T extends IDelegate> extends RxAppCompatActivity implements BaseViewModel.ViewModelListener,View.OnClickListener,View.OnLongClickListener {
 
     protected T viewDelegate;
 
     public ActivityPresenter() {
         try {
-            viewDelegate = getDelegateClass().newInstance();
+            if(getDelegateClass()!=null) {
+                viewDelegate = getDelegateClass().newInstance();
+            }
         } catch (InstantiationException e) {
             throw new RuntimeException("create IDelegate error");
         } catch (IllegalAccessException e) {
@@ -51,6 +55,9 @@ public abstract class ActivityPresenter<T extends IDelegate,D extends ViewDataBi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         createBinding(getLayoutInflater(), null, savedInstanceState);
         setContentView(viewDelegate.getRootView());
         initToolbar();
@@ -58,8 +65,8 @@ public abstract class ActivityPresenter<T extends IDelegate,D extends ViewDataBi
         bindEvenListener();
     }
 
-    protected D createBinding(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return (D) viewDelegate.create(inflater, container, savedInstanceState);
+    protected ViewDataBinding createBinding(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return  viewDelegate.create(inflater, container, savedInstanceState);
     }
 
     protected void bindEvenListener() {

@@ -1,4 +1,4 @@
-package com.then.atry.data.viewmodel;
+package com.then.atry.viewmodel;
 
 import com.kymjs.themvp.viewmodel.BaseViewModel;
 

@@ -8,11 +8,16 @@ import com.then.atry.databinding.MessageHubFragmentBinding;
  * Created by then on 2016/12/6.
  */
 
-public class MessageHubDelegate extends AppDelegate<MessageHubFragmentBinding> {
+public class MessageHubDelegate extends AppDelegate<MessageHubViewModel,MessageHubFragmentBinding> {
 
     @Override
     public int getRootLayoutId() {
         return R.layout.message_hub_fragment;
+    }
+
+    @Override
+    protected void bindViewModel() {
+
     }
 
     @Override

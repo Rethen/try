@@ -28,12 +28,12 @@ import com.kymjs.themvp.view.IDelegate;
  * @param <D> DataBinding
  * @author kymjs (http://www.kymjs.com/) on 10/23/15.
  */
-public abstract class DataBindActivity<T extends IDelegate, D extends ViewDataBinding> extends
-        ActivityPresenter<T,D> {
-    protected D binding;
+public abstract class DataBindActivity<T extends IDelegate> extends
+        ActivityPresenter<T> {
+    protected ViewDataBinding binding;
 
     @Override
-    protected D createBinding(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected ViewDataBinding createBinding(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = super.createBinding(inflater, container, savedInstanceState);
         return binding;
     }
