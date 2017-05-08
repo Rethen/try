@@ -63,6 +63,7 @@ dependencies {
     compile rootProject.ext.dependencies["design"]
     compile rootProject.ext.dependencies["cardview-v7"]
     compile rootProject.ext.dependencies["constraint-layout"]
+    compile rootProject.ext.dependencies["super_textview"]
     compile rootProject.ext.dependencies["material-values"]
     compile rootProject.ext.dependencies["flexlayout"]
     compile rootProject.ext.dependencies["permissions"]
@@ -71,9 +72,10 @@ dependencies {
     compile rootProject.ext.dependencies["multidex"]
     compile rootProject.ext.dependencies["retrofit2"]
     compile rootProject.ext.dependencies["rx-android"]
-
+    compile rootProject.ext.dependencies["rx-android"]
     compile rootProject.ext.dependencies["dagger"]
-    compile rootProject.ext.dependencies["fairyplugin"]
+    compile rootProject.ext.dependencies["toasty"]
+
     provided rootProject.ext.dependencies["dagger-compiler"]
 
 

@@ -76,6 +76,8 @@ dependencies {
 
     compile rootProject.ext.dependencies["utilcode"]
 
+    compile rootProject.ext.dependencies["luban"]
+
     annotationProcessor  rootProject.ext.dependencies["simplepreferences-processor"]
 
     testCompile rootProject.ext.testDependencies["junit"]
