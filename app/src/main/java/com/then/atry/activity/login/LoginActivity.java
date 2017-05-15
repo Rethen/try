@@ -16,7 +16,6 @@ public class LoginActivity extends BaseActivity {
     private  static  String INTENT_KEY_NAME="INTENT_KEY_NAME";
 
 
-
     public  static  void  start(Context context,String name){
         Intent intent=new Intent(context, LoginActivity.class);
         intent.putExtra(INTENT_KEY_NAME,"kdjf");

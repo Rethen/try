@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.kymjs.themvp.ViewListenerManager;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
+import com.limpoxe.fairy.content.PluginDescriptor;
+import com.limpoxe.fairy.manager.PluginManagerHelper;
 import com.then.atry.BR;
 import com.then.atry.R;
 import com.then.atry.databinding.MessageHubFragmentBinding;
@@ -22,8 +24,10 @@ import com.then.atry.internal.di.components.DaggerMessageHubFragmentComponent;
 import com.then.atry.internal.di.components.MessageHubFragmentComponent;
 import com.then.atry.internal.di.modules.ActivityModule;
 import com.then.atry.viewmodel.ListViewModel;
-import com.then.atry.viewmodel.MessageHubViewModel;
+import com.then.atry.viewmodel.listitem.MessageHubViewModel;
 import com.trello.rxlifecycle2.android.FragmentEvent;
+
+import java.util.Collection;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -56,9 +60,9 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewListenerManager.getInstance().reigester(this);
-      /*  PluginManagerHelper.installPlugin("/sdcard/chat.apk");
+        PluginManagerHelper.installPlugin("/sdcard/chat.apk");
         Collection<PluginDescriptor> pluginDescriptors = PluginManagerHelper.getPlugins();
-        Log.d("MessageHubFragment", "pluginDescriptors.size():" + pluginDescriptors.size());*/
+        Log.d("MessageHubFragment", "pluginDescriptors.size():" + pluginDescriptors.size());
         messageHubFragmentComponent = DaggerMessageHubFragmentComponent.builder().activityModule(new ActivityModule(getActivity())).applicationComponent(getAppComponment()).build();
         messageHubFragmentComponent.inject(this);
 

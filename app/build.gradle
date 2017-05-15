@@ -75,7 +75,7 @@ dependencies {
     compile rootProject.ext.dependencies["rx-android"]
     compile rootProject.ext.dependencies["dagger"]
     compile rootProject.ext.dependencies["toasty"]
-
+    compile rootProject.ext.dependencies["fairyplugin"]
     provided rootProject.ext.dependencies["dagger-compiler"]
 
 

@@ -54,8 +54,6 @@ public class MainActivity extends BaseActivity<MainDelegate> implements Navigati
     }
 
 
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -166,7 +164,7 @@ public class MainActivity extends BaseActivity<MainDelegate> implements Navigati
         mCurrentFrgment = fragment;
         //判断此Fragment是否已经添加到FragmentTransaction事物中
         if (!fragment.isAdded()) {
-//            ft.add(binding.appBarMain.contentMain.content.getId(), fragment, fragment.getClass().getName());
+            ft.add(viewDelegate.getContentMainId(), fragment, fragment.getClass().getName());
         } else {
             ft.show(fragment);
         }

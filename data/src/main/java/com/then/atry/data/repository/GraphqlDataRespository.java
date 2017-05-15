@@ -1,6 +1,6 @@
 package com.then.atry.data.repository;
 
-import com.then.atry.data.net.HttpApiManager;
+import com.then.atry.data.net.pull.HttpApiManager;
 import com.then.atry.domain.GraphqlModel;
 import com.then.atry.domain.repository.GraphqlRespository;
 

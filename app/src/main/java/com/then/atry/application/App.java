@@ -1,14 +1,16 @@
 package com.then.atry.application;
 
+import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 
 import com.kymjs.themvp.ViewListenerManager;
+import com.limpoxe.fairy.core.PluginLoader;
 import com.then.atry.activity.main.MainActivity;
 import com.then.atry.fragment.messagehub.MessageHubFragment;
 import com.then.atry.internal.di.components.ApplicationComponent;
 import com.then.atry.internal.di.components.DaggerApplicationComponent;
 import com.then.atry.internal.di.modules.ApplicationModule;
-import com.then.atry.viewmodel.MessageHubViewModel;
+import com.then.atry.viewmodel.listitem.MessageHubViewModel;
 
 import io.realm.Realm;
 
@@ -22,7 +24,6 @@ public class App extends MultiDexApplication {
 
     private ApplicationComponent mAppComponent;
 
-
     private ViewListenerManager viewListenerManager;
 
 
@@ -35,7 +36,8 @@ public class App extends MultiDexApplication {
         Realm.init(getApplicationContext());
 //        initPrefManager();
     }
-   /* @Override
+
+    @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         PluginLoader.initLoader(this);
@@ -44,7 +46,7 @@ public class App extends MultiDexApplication {
     @Override
     public Context getBaseContext() {
         return PluginLoader.fixBaseContextForReceiver(super.getBaseContext());
-    }*/
+    }
 
     private void initializeInjector() {
         this.mAppComponent = DaggerApplicationComponent.builder()

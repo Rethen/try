@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.then.atry.viewmodel.MessageHubViewModel">
+            type="com.then.atry.viewmodel.listitem.MessageHubViewModel">
 
         </variable>
 

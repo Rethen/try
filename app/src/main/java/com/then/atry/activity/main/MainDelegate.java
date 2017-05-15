@@ -14,7 +14,7 @@ import com.then.atry.databinding.ActivityMainBinding;
  * Created by then on 2016/12/6.
  */
 
-public class MainDelegate extends AppDelegate<MainViewModel,ActivityMainBinding> {
+public class MainDelegate extends AppDelegate<MainViewModel, ActivityMainBinding> {
 
 
     @Override
@@ -41,19 +41,19 @@ public class MainDelegate extends AppDelegate<MainViewModel,ActivityMainBinding>
                 getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = get(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) getActivity());
-
         BottomNavigationView bottomNavigationView = get(R.id.bottom_navigation);
-
         bottomNavigationView.setOnNavigationItemSelectedListener((BottomNavigationView.OnNavigationItemSelectedListener) getActivity());
-
     }
 
 
-    public  void  kk(){
+    public void kk() {
 
+    }
+
+    public int getContentMainId() {
+        return viewDataBinding.appBarMain.contentMain.content.getId();
     }
 
 

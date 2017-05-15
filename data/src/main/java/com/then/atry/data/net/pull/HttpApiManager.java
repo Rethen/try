@@ -1,4 +1,4 @@
-package com.then.atry.data.net;
+package com.then.atry.data.net.pull;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -24,6 +24,7 @@ public class HttpApiManager {
 
     //正式
     public  static  final  String GRAPHQL_URL="192.168.2.152";
+
     public  static  final  int GRAPHQL_PORT=8080;
 
 

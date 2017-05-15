@@ -1,4 +1,4 @@
-package com.then.atry.viewmodel;
+package com.then.atry.viewmodel.listitem;
 
 import android.databinding.Bindable;
 import com.kymjs.themvp.viewmodel.BaseViewModel;
