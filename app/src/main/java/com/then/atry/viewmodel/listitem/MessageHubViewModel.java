@@ -13,6 +13,9 @@ public class MessageHubViewModel extends BaseViewModel {
     @Bindable
     private  String title;
 
+    @Bindable
+    private int  countdown;
+
     public String getTitle() {
         return title;
     }
@@ -20,5 +23,14 @@ public class MessageHubViewModel extends BaseViewModel {
     public void setTitle(String title) {
         this.title = title;
         notifyPropertyChanged(BR.title);
+    }
+
+    public int getCountdown() {
+        return countdown;
+    }
+
+    public void setCountdown(int countdown) {
+        this.countdown = countdown;
+        notifyPropertyChanged(BR.countdown);
     }
 }

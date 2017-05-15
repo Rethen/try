@@ -1,6 +1,7 @@
 package com.then.atry.fragment.messagehub;
 
 import android.content.Intent;
+import android.databinding.Observable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.then.atry.viewmodel.listitem.MessageHubViewModel;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 
 import java.util.Collection;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,8 +40,6 @@ import javax.inject.Named;
  */
 
 public class MessageHubFragment extends BaseFragment<MessageHubDelegate, MessageHubFragmentBinding> {
-
-
 
 
     @Inject
@@ -82,6 +82,7 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
         for (int i = 0; i < 100; i++) {
             MessageHubViewModel messageHubViewModel = new MessageHubViewModel();
             messageHubViewModel.setTitle("ldkjgldkfjg" + i);
+            messageHubViewModel.setCountdown(new Random().nextInt(100));
             items.add(messageHubViewModel);
         }
 
@@ -92,10 +93,29 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
             public void run() {
                 try {
                     Thread.sleep(5000);
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                graphqlUseCase.execute(new GraphqlObserver(),"",bindUntilEvent(FragmentEvent.PAUSE));
+                graphqlUseCase.execute(new GraphqlObserver(), "", bindUntilEvent(FragmentEvent.PAUSE));
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(1000);
+                        for (Object item : items) {
+                            MessageHubViewModel messageHubViewModel = (MessageHubViewModel) item;
+                            messageHubViewModel.setCountdown((messageHubViewModel.getCountdown() - 1));
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
         }).start();
 
@@ -140,17 +160,17 @@ public class MessageHubFragment extends BaseFragment<MessageHubDelegate, Message
     }
 
 
-    private  static class   GraphqlObserver  extends DefaultObserver<GraphqlModel> {
+    private static class GraphqlObserver extends DefaultObserver<GraphqlModel> {
         @Override
         public void onNext(GraphqlModel graphqlModel) {
             Log.d("GraphqlObserver", "graphqlModel:" + graphqlModel);
         }
+
         @Override
         public void onError(Throwable exception) {
             exception.printStackTrace();
         }
     }
-
 
 
 }

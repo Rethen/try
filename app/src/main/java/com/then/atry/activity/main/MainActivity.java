@@ -50,7 +50,6 @@ public class MainActivity extends BaseActivity<MainDelegate> implements Navigati
         super.bindEvenListener();
         //可以同时对多个控件设置同一个点击事件,后面id参数可以传多个
         viewDelegate.setOnClickListener(this);
-
     }
 
 

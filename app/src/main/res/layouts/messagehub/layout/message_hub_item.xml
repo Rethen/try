@@ -31,6 +31,15 @@
             android:text="@{item.title}" />
 
 
+        <TextView
+            android:id="@+id/item_message_hub_count_down"
+            android:layout_width="wrap_content"
+            android:onClick="@{item::onClick}"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:layout_alignParentRight="true"
+            android:text="@{String.valueOf(item.countdown)}" />
+
     </RelativeLayout>
 
 

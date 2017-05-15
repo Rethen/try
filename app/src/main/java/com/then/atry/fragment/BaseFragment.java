@@ -22,10 +22,6 @@ public abstract class BaseFragment<T extends IDelegate, D extends ViewDataBindin
 
     }
 
-    @Override
-    protected Class<T> getDelegateClass() {
-        return null;
-    }
 
 
     protected ApplicationComponent getAppComponment() {
